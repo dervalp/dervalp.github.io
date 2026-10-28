@@ -34,6 +34,31 @@ export type CredibilityItem = {
   slug: string;
 };
 
+export type CurrentWork = {
+  id: string;
+  label: string;
+  name: string;
+  role: string;
+  years?: string;
+  summary: string[];
+  url: string;
+  linkLabel: string;
+};
+
+export type CareerOutcome = {
+  value: string;
+  valueSub?: string;
+  label: string;
+};
+
+export type CareerEntry = {
+  years: string;
+  company: string;
+  location: string;
+  role: string;
+  detail: string;
+};
+
 export type SiteData = {
   seo: {
     title: string;
@@ -81,6 +106,14 @@ export type SiteData = {
     description?: string;
     note?: string;
     items: CredibilityItem[];
+  };
+  career: {
+    currentRole: string;
+    currentEmployer: string;
+    currentWork: CurrentWork[];
+    priorOutcomesLabel: string;
+    priorOutcomes: CareerOutcome[];
+    timeline: CareerEntry[];
   };
   contact: {
     title: string;
@@ -304,6 +337,95 @@ export const siteData = {
         logoPath: "/logos/amilia.svg",
         slug: "amilia",
         relevance: ["VP Product Development", "SaaS Platform"]
+      }
+    ]
+  },
+  // Career story. Source: Pierre_Derval_CV_AI_Product_Executive_2026_v5.pdf
+  // (the public /Pierre_Derval_Resume.pdf). Keep dates and attribution aligned with it.
+  career: {
+    currentRole: "Head of AI",
+    currentEmployer: "Vertuoza",
+    currentWork: [
+      {
+        id: "vertuoza",
+        label: "Current role",
+        name: "Vertuoza",
+        role: "Head of AI",
+        years: "2026 – present",
+        summary: [
+          "I am Head of AI at Vertuoza, a B2B construction-management SaaS platform based in Belgium. I lead AI initiatives that span product, engineering and platform architecture.",
+          "Together with the Platform team, I brought AI Advisor and Model Context Protocol (MCP) capabilities into production."
+        ],
+        url: "https://www.vertuoza.com/",
+        linkLabel: "vertuoza.com"
+      },
+      {
+        id: "omni-loop",
+        label: "Created by me",
+        name: "Omni-loop",
+        role: "Creator",
+        summary: [
+          "I created Omni-loop, a loop engineering framework for AI-assisted software development and iterative product delivery. It is a delivery framework for coding agents, where every change still goes through human review.",
+          "I built it as part of my work as Head of AI at Vertuoza, and it is publicly documented at omni-loop.xyz."
+        ],
+        url: "https://www.omni-loop.xyz/",
+        linkLabel: "omni-loop.xyz"
+      }
+    ],
+    priorOutcomesLabel: "Selected outcomes, before Vertuoza",
+    priorOutcomes: [
+      { value: "80%", label: "Customer adoption of new AI features within 6 months" },
+      { value: "weeks", valueSub: "→ hours", label: "Time to launch AI agents" },
+      { value: "3 months", valueSub: "→ days", label: "Enterprise installation and onboarding" },
+      { value: "4 months", label: "Multi-tenant SaaS platform delivered" }
+    ],
+    timeline: [
+      {
+        years: "2026 – present",
+        company: "Vertuoza",
+        location: "Belgium",
+        role: "Head of AI",
+        detail:
+          "B2B construction-management SaaS. Leads AI across product, engineering and platform architecture. Created Omni-loop; brought AI Advisor and MCP capabilities into production with the Platform team."
+      },
+      {
+        years: "2020 – 2026",
+        company: "CluedIn",
+        location: "Brussels",
+        role: "Chief Product Technical Officer",
+        detail:
+          "Enterprise data management and AI platform for regulated enterprises, ACV 300k+, 40-person organisation. Owned product strategy with the CEO, led a multi-tenant SaaS transformation in 4 months and built agentic AI workflows."
+      },
+      {
+        years: "2016 – 2020",
+        company: "Adform",
+        location: "London",
+        role: "Principal Architect",
+        detail:
+          "Cross-product architecture for an enterprise advertising platform: unified UX and front-end architecture, GraphQL federation. The broader FLOW initiative later received a Red Dot award."
+      },
+      {
+        years: "2012 – 2016",
+        company: "Sitecore",
+        location: "Copenhagen",
+        role: "Lead Developer",
+        detail:
+          "Innovation team. Helped build SPEAK, the framework used to accelerate vertical applications across Sitecore."
+      },
+      {
+        years: "2010 – 2012",
+        company: "Amilia",
+        location: "Montreal",
+        role: "VP Product Development",
+        detail:
+          "Led product development and the engineering team of a SaaS application, from architectural direction to hiring and delivery."
+      },
+      {
+        years: "2005 – 2009",
+        company: "Earlier roles",
+        location: "Brussels",
+        role: "Engineering and leadership roles",
+        detail: "Aubay (AG Insurance) · Genivar · Experteam (BNP Paribas Fortis) · SME IT consulting"
       }
     ]
   },
