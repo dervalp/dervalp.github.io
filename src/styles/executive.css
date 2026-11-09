@@ -78,7 +78,7 @@ summary:focus-visible {
 }
 
 .site-header__logo {
-  height: 36px;
+  height: 32px;
   width: auto;
   max-width: none;
 }
@@ -196,7 +196,7 @@ summary:focus-visible {
 
 @media (max-width: 480px) {
   .site-header__logo {
-    height: 30px;
+    height: 27px;
   }
 }
 
