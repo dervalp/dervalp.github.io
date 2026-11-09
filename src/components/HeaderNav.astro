@@ -1,19 +1,15 @@
 ---
 import type { NavItem } from "../data/site";
 import { withBase } from "../utils/url";
-import IconLink from "./IconLink.astro";
 import ThemeToggle from "./ThemeToggle.astro";
 
 interface Props {
-  name: string;
   sections: NavItem[];
   ctaHref: string;
   ctaLabel: string;
-  githubUrl: string;
-  linkedinUrl: string;
 }
 
-const { name, sections, ctaHref, ctaLabel, githubUrl, linkedinUrl } = Astro.props;
+const { sections, ctaHref, ctaLabel } = Astro.props;
 
 // Normalise path for server-side active state on page-link nav items
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
@@ -23,28 +19,21 @@ const pathWithoutBase = Astro.url.pathname.replace(base, "") || "/";
 <header class="site-header">
   <div class="shell">
     <div class="site-header__bar">
-      <a
-        class="site-header__brand"
-        href={withBase("/")}
-        aria-label="Pierre Derval — home"
-      >
-        <img class="site-header__logo site-header__logo--dark" src={withBase("/pierre-derval-logo.svg")} alt="Pierre Derval" height="22" />
-        <img class="site-header__logo site-header__logo--light" src={withBase("/pierre-derval-logo-white.svg")} alt="Pierre Derval" height="22" />
+      <a class="site-header__brand" href={withBase("/")} aria-label="Pierre Derval, home">
+        <img class="site-header__logo site-header__logo--dark" src={withBase("/pierre-derval-logo.svg")} alt="Pierre Derval" width="254" height="44" />
+        <img class="site-header__logo site-header__logo--light" src={withBase("/pierre-derval-logo-white.svg")} alt="Pierre Derval" width="254" height="44" />
       </a>
 
       <nav aria-label="Primary" class="site-header__nav">
         {
           sections.map((section) => {
-            const isPageLink = !!section.href;
-            const linkHref = isPageLink ? withBase(section.href!) : `#${section.id}`;
-            const serverActive = isPageLink && pathWithoutBase.startsWith(section.href!);
+            const isActive = pathWithoutBase.startsWith(section.href);
             return (
               <a
                 class="nav-link"
-                data-nav-link={!isPageLink ? "" : undefined}
-                data-active={serverActive ? "true" : isPageLink ? "false" : undefined}
-                href={linkHref}
-                aria-current={serverActive ? "page" : undefined}
+                data-active={isActive ? "true" : "false"}
+                href={withBase(section.href)}
+                aria-current={isActive ? "page" : undefined}
               >
                 {section.label}
               </a>
@@ -54,53 +43,18 @@ const pathWithoutBase = Astro.url.pathname.replace(base, "") || "/";
       </nav>
 
       <div class="site-header__actions">
-        <IconLink external={true} href={githubUrl} icon="github" kind="icon" label="View GitHub profile" />
-        <IconLink external={true} href={linkedinUrl} icon="linkedin" kind="icon" label="View LinkedIn profile" />
+        <a class="site-header__talk" href={ctaHref}>{ctaLabel} <span aria-hidden="true">↗</span></a>
         <ThemeToggle />
-        <a class="button-primary site-header__cta" href={ctaHref}>
-          {ctaLabel}
-        </a>
+        <details class="site-header__menu">
+          <summary aria-label="Navigation menu">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>
+          </summary>
+          <nav aria-label="Menu">
+            {sections.map((section) => <a href={withBase(section.href)}>{section.label}</a>)}
+            <a href={ctaHref}>{ctaLabel}</a>
+          </nav>
+        </details>
       </div>
     </div>
   </div>
 </header>
-
-<script is:inline>
-  const navLinks = Array.from(document.querySelectorAll("[data-nav-link]"));
-  const observedSections = Array.from(document.querySelectorAll("[data-section]"));
-
-  const setActiveLink = (id) => {
-    navLinks.forEach((link) => {
-      const isActive = link.getAttribute("href") === `#${id}`;
-      link.dataset.active = isActive ? "true" : "false";
-      if (isActive) {
-        link.setAttribute("aria-current", "location");
-      } else {
-        link.removeAttribute("aria-current");
-      }
-    });
-  };
-
-  if (navLinks.length > 0 && observedSections.length > 0) {
-    const initialHash = window.location.hash.replace("#", "");
-    setActiveLink(initialHash || observedSections[0].id);
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visibleEntry = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((first, second) => second.intersectionRatio - first.intersectionRatio)[0];
-
-        if (visibleEntry?.target?.id) {
-          setActiveLink(visibleEntry.target.id);
-        }
-      },
-      {
-        rootMargin: "-24% 0px -58% 0px",
-        threshold: [0.2, 0.45, 0.7]
-      }
-    );
-
-    observedSections.forEach((section) => observer.observe(section));
-  }
-</script>

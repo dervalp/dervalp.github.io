@@ -1,37 +1,7 @@
 export type NavItem = {
   id: string;
   label: string;
-  href?: string; // if present, used as link href directly instead of #id
-};
-
-export type Capability = {
-  title: string;
-  description: string;
-};
-
-export type CapabilityGroup = {
-  label: string;
-  items: Capability[];
-};
-
-export type Transformation = {
-  eyebrow?: string;
-  title: string;
-  description: string[];
-};
-
-export type LogoItem = {
-  name: string;
-  logoPath: string;
-  slug: string;
-};
-
-export type CredibilityItem = {
-  company: string;
-  relevance?: string;
-  logoAlt: string;
-  logoPath: string;
-  slug: string;
+  href: string;
 };
 
 export type CurrentWork = {
@@ -43,6 +13,36 @@ export type CurrentWork = {
   summary: string[];
   url: string;
   linkLabel: string;
+};
+
+export type ProofPanel = {
+  number: string;
+  role: string;
+  context: string;
+  name: string;
+  logoPath: string;
+  logoStyle: "plaque" | "crest";
+  logoWidth: number;
+  logoHeight: number;
+  headlineHtml: string;
+  subline: string;
+  points: string[];
+  url: string;
+};
+
+export type HomeOutcome = {
+  value: string;
+  label: string;
+  source: string;
+};
+
+export type Engagement = {
+  id: string;
+  title: string;
+  summary: string;
+  situation: string;
+  workOn: string[];
+  approach: string[];
 };
 
 export type CareerOutcome = {
@@ -76,50 +76,26 @@ export type SiteData = {
     name: string;
     brandLine: string;
     eyebrow: string;
-    headline: string;
-    supportingText: string[];
-    focusAreas: string[];
+    supportingText: string;
     primaryCtaLabel: string;
-    secondaryCtaLabel: string;
-    quaternaryCtaLabel: string;
-    tertiaryCtaLabel: string;
-  };
-  pointOfView: {
-    titleLines: string[];
-    paragraphs: string[];
-    closing: string;
-    workWithLabel: string;
-    workWith: LogoItem[];
-  };
-  capabilities: {
-    title: string;
-    description: string;
-    groups: CapabilityGroup[];
-  };
-  transformations: {
-    title: string;
-    description: string;
-    items: Transformation[];
-  };
-  credibility: {
-    title: string;
-    description?: string;
-    note?: string;
-    items: CredibilityItem[];
+    headerCtaLabel: string;
+    resumeCtaLabel: string;
   };
   career: {
     currentRole: string;
     currentEmployer: string;
     currentWork: CurrentWork[];
+    proofPanels: ProofPanel[];
+    homeOutcomes: HomeOutcome[];
     priorOutcomesLabel: string;
     priorOutcomes: CareerOutcome[];
     timeline: CareerEntry[];
   };
+  engagements: Engagement[];
   contact: {
     title: string;
     description: string;
     directMessage: string;
-    secondaryMessage?: string;
     formTitle: string;
     formDescription: string;
     directTitle: string;
@@ -141,13 +117,13 @@ export type SiteData = {
 
 export const siteData = {
   seo: {
-    title: "Pierre Derval | AI Product Leadership for Enterprise Software",
+    title: "Pierre Derval | AI & Product Executive, Head of AI at Vertuoza",
     description:
-      "Pierre Derval helps enterprise software teams turn AI ambition into shipped, governed products by aligning product, platform, and execution in complex B2B environments.",
+      "Pierre Derval is an AI & Product Executive and Head of AI at Vertuoza. He helps CEOs and CTOs turn AI ambition into shipped products.",
     siteName: "Pierre Derval",
     locale: "en_BE",
     ogImage: "/og-image.png",
-    ogImageAlt: "Pierre Derval — AI. Shipped.",
+    ogImageAlt: "Pierre Derval, AI & Product Executive and Head of AI at Vertuoza",
     ogImageWidth: 1200,
     ogImageHeight: 630,
     favicon: "/favicon.svg"
@@ -161,184 +137,13 @@ export const siteData = {
   ],
   hero: {
     name: "Pierre Derval",
-    brandLine: "AI → shipped",
-    eyebrow: "AI • Product Leadership • Platform Strategy",
-    headline: "AI. Shipped.",
-    supportingText: [
-      "AI doesn't fail in the lab. It fails in production.",
-      "I help enterprise teams turn AI ambition into shipped, governed products - by treating AI as a platform capability, not a feature.",
-      "Built and scaled AI and data platforms in complex, regulated environments."
-    ],
-    focusAreas: [
-      "Enterprise AI productization",
-      "Platform modernization",
-      "Executive alignment"
-    ],
-    primaryCtaLabel: "Start a conversation",
-    secondaryCtaLabel: "View LinkedIn",
-    quaternaryCtaLabel: "View GitHub",
-    tertiaryCtaLabel: "Download resume"
-  },
-  pointOfView: {
-    titleLines: ["AI is not", "a feature."],
-    paragraphs: [
-      "AI changes how a product behaves, how decisions are made, and how trust is built.",
-      "The challenge is not adding AI. It is deciding where it belongs and how to ship it without breaking the system around it.",
-      "Most teams treat AI as an add-on. That creates complexity, not value."
-    ],
-    closing:
-      "I work with leaders to turn that into clear decisions and shipped outcomes.",
-    workWithLabel: "Work with",
-    workWith: [
-      {
-        name: "Anthropic",
-        logoPath: "/logos/providers/anthropic.svg",
-        slug: "anthropic"
-      },
-      {
-        name: "OpenAI",
-        logoPath: "/logos/providers/openai.svg",
-        slug: "openai"
-      },
-      {
-        name: "Gemini",
-        logoPath: "/logos/providers/gemini.svg",
-        slug: "gemini"
-      }
-    ]
-  },
-  capabilities: {
-    title: "What I focus on",
-    description:
-      "Structured around what matters most in complex software environments.",
-    groups: [
-      {
-        label: "Strategy",
-        items: [
-          {
-            title: "Platform clarity",
-            description:
-              "Turn platform complexity into product decisions teams can execute."
-          },
-          {
-            title: "AI productization",
-            description:
-              "Move AI from isolated experiments to reusable, governed product capabilities."
-          }
-        ]
-      },
-      {
-        label: "Execution",
-        items: [
-          {
-            title: "Leadership alignment",
-            description:
-              "Align product, platform, and engineering around one clear execution path."
-          },
-          {
-            title: "Execution quality",
-            description:
-              "Drive faster decisions, cleaner prioritization, and stronger delivery in complex teams."
-          }
-        ]
-      },
-      {
-        label: "AI",
-        items: [
-          {
-            title: "Time to value",
-            description:
-              "Reduce time to value in complex SaaS environments."
-          },
-          {
-            title: "Product structure",
-            description:
-              "Bring clarity to complex product landscapes so teams can scale without fragmentation."
-          }
-        ]
-      }
-    ]
-  },
-  transformations: {
-    title: "What I've led",
-    description:
-      "A few of the operating shifts I’m most often asked to lead in complex software environments.",
-    items: [
-      {
-        eyebrow: "AI",
-        title: "From AI experiments to shipped product capabilities",
-        description: [
-          "Turned isolated AI work into reusable, governed product capabilities integrated into the platform.",
-          "Reduced time to launch from weeks to hours and enabled consistent delivery across teams."
-        ]
-      },
-      {
-        eyebrow: "Platform",
-        title: "From platform sprawl to scalable product structure",
-        description: [
-          "Reshaped complex SaaS and data platforms into clearer product structures with stronger boundaries and ownership.",
-          "Enabled faster execution and reduced long-term fragmentation."
-        ]
-      },
-      {
-        eyebrow: "Adoption",
-        title: "From slow onboarding to fast adoption",
-        description: [
-          "Reduced onboarding friction and shortened time to value from months to days.",
-          "Made complex enterprise products easier to implement, use, and expand."
-        ]
-      },
-      {
-        eyebrow: "Alignment",
-        title: "From misalignment to decisive execution",
-        description: [
-          "Aligned founders, executives, product, and engineering around clear priorities and tradeoffs.",
-          "Improved decision speed and ensured plans held up in delivery."
-        ]
-      }
-    ]
-  },
-  credibility: {
-    title: "Proven in Enterprise",
-    description: "20+ years building and scaling product, platform, and AI systems in complex B2B environments.",
-    note: "Worked across data platforms, adtech, and enterprise SaaS in complex and regulated environments.",
-    items: [
-      {
-        company: "Ikary",
-        logoAlt: "Ikary logo",
-        logoPath: "/logos/ikary.svg",
-        slug: "ikary",
-        relevance: ["Creator", "Open-Source AI Platform"]
-      },
-      {
-        company: "CluedIn",
-        logoAlt: "CluedIn logo",
-        logoPath: "/logos/cluedin.png",
-        slug: "cluedin",
-        relevance: ["Chief Product Technical Officer", "AI & Data Platform"]
-      },
-      {
-        company: "Adform",
-        logoAlt: "Adform logo",
-        logoPath: "/logos/adform.svg?v=3",
-        slug: "adform",
-        relevance: ["Principal Architect", "Adtech · Red Dot Award"]
-      },
-      {
-        company: "Sitecore",
-        logoAlt: "Sitecore logo",
-        logoPath: "/logos/sitecore.svg",
-        slug: "sitecore",
-        relevance: ["Lead Developer", "Framework · Innovation Team"]
-      },
-      {
-        company: "Amilia",
-        logoAlt: "Amilia logo",
-        logoPath: "/logos/amilia.svg",
-        slug: "amilia",
-        relevance: ["VP Product Development", "SaaS Platform"]
-      }
-    ]
+    brandLine: "Strategy. Craft. Delivery.",
+    eyebrow: "AI & Product Executive · Belgium",
+    supportingText:
+      "I connect product strategy, engineering and AI to turn complex technology into products people use.",
+    primaryCtaLabel: "Discuss your challenge",
+    headerCtaLabel: "Let’s talk",
+    resumeCtaLabel: "Download CV"
   },
   // Career story. Source: Pierre_Derval_CV_AI_Product_Executive_2026_v5.pdf
   // (the public /Pierre_Derval_Resume.pdf). Keep dates and attribution aligned with it.
@@ -371,6 +176,48 @@ export const siteData = {
         url: "https://www.omni-loop.xyz/",
         linkLabel: "omni-loop.xyz"
       }
+    ],
+    // Metrics stated by Pierre for the current-work panels (PRD #29, 2026-10-28).
+    proofPanels: [
+      {
+        number: "01",
+        role: "Head of AI",
+        context: "Construction-management SaaS",
+        name: "Vertuoza",
+        logoPath: "/logos/vertuoza.svg",
+        logoStyle: "plaque",
+        logoWidth: 184,
+        logoHeight: 56,
+        headlineHtml: "From <em>65 days</em> to 6.",
+        subline: "Median time to market, cut by 10×.",
+        points: [
+          "AI Advisor and MCP shipped inside the product",
+          "Support and bug fixing automated with AI"
+        ],
+        url: "https://www.vertuoza.com/"
+      },
+      {
+        number: "02",
+        role: "Created by me",
+        context: "Delivery framework for coding agents",
+        name: "Omni-loop",
+        logoPath: "/logos/omni-loop.svg",
+        logoStyle: "crest",
+        logoWidth: 122,
+        logoHeight: 18,
+        headlineHtml: "<em>10×</em> more pull requests.",
+        subline: "Same human review on every one.",
+        points: [
+          "40% of merged work written by agents",
+          "Product managers and non-technical teammates ship to the product"
+        ],
+        url: "https://www.omni-loop.xyz/"
+      }
+    ],
+    homeOutcomes: [
+      { value: "80%", label: "Customer adoption of new AI features within six months.", source: "Prior-career outcome" },
+      { value: "4 months", label: "To deliver a multi-tenant SaaS platform transformation.", source: "CluedIn" },
+      { value: "Weeks → hours", label: "Time to launch AI agents with reusable deployment patterns.", source: "CluedIn" }
     ],
     priorOutcomesLabel: "Selected outcomes, before Vertuoza",
     priorOutcomes: [
@@ -429,14 +276,62 @@ export const siteData = {
       }
     ]
   },
+  engagements: [
+    {
+      id: "ai-product-direction",
+      title: "AI & product direction",
+      summary: "Decide where AI belongs, what is worth building and how it supports your business.",
+      situation:
+        "There is pressure to ship AI, and more ideas than certainty. Shipping the wrong thing, at the wrong time, for the wrong reasons creates more debt than it resolves.",
+      workOn: [
+        "Which problems are worth solving with AI, and which are better served by automation or simpler tooling",
+        "Build-versus-buy framing, and a case that holds up under leadership scrutiny",
+        "A product direction grounded in business priority rather than technology enthusiasm"
+      ],
+      approach: [
+        "I help leadership teams define what they are actually trying to achieve with AI, then turn that into a small number of decisions the organisation can act on.",
+        "The result is a clear product direction: what to build, what to leave alone, and why."
+      ]
+    },
+    {
+      id: "platform-delivery-assessment",
+      title: "Platform & delivery assessment",
+      summary: "Find the architectural and operating constraints between your ambition and production.",
+      situation:
+        "The ambition is clear but delivery has stalled. Pilots do not reach production, and it is hard to tell whether the cause is the data, the architecture, the governance or the way teams are organised.",
+      workOn: [
+        "Data, architecture and governance readiness, and the gaps that carry real risk",
+        "Ownership, accountability and decision rights across engineering, data and the business",
+        "A prioritised view of what is blocking production and what to change first"
+      ],
+      approach: [
+        "AI changes how software teams need to be organised and how products need to be governed. Most operating models were not designed for this.",
+        "I look at the platform and the operating model together, and give you an honest account of what stands between the plan and production."
+      ]
+    },
+    {
+      id: "hands-on-executive-advisory",
+      title: "Hands-on executive advisory",
+      summary: "Connect leadership decisions with the teams, systems and working practices that make them real.",
+      situation:
+        "A programme is already in motion and the decisions are live. You need an experienced outside view that is close enough to the work to be useful.",
+      workOn: [
+        "Direct, practical input into architecture, product and delivery decisions already under way",
+        "Alignment between founders, executives, product and engineering around priorities and tradeoffs",
+        "Working practices that let teams adopt AI-assisted delivery while keeping human review"
+      ],
+      approach: [
+        "This is not a strategy exercise. I stay close to the decisions and the people making them, not only the deck reviews.",
+        "I am not sold on any particular vendor, platform or methodology. The only goal is execution that holds."
+      ]
+    }
+  ],
   contact: {
-    title: "Building AI in complex environments?",
+    title: "What needs to move forward?",
     description:
       "If product, platform, and AI need to move together, I can help make that real.",
     directMessage:
-      "I work with founders, CEOs, and senior leaders where AI, product, platform, and execution need to move together.",
-    secondaryMessage:
-      "I take on a small number of roles, advisory relationships, and selected conversations.",
+      "Tell me what you are trying to change, where things stand and what is getting in the way.",
     formTitle: "Start a conversation",
     formDescription:
       "A few lines of context are enough.",
