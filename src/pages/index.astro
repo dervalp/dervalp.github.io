@@ -1,27 +1,24 @@
 ---
 import { getCollection } from "astro:content";
-import BlogPostCard from "../components/BlogPostCard.astro";
-import CapabilityCard from "../components/CapabilityCard.astro";
-import ContactPanel from "../components/ContactPanel.astro";
-import CredibilityItem from "../components/CredibilityItem.astro";
 import HeaderNav from "../components/HeaderNav.astro";
-import IconLink from "../components/IconLink.astro";
-import SectionHeading from "../components/SectionHeading.astro";
-import TransformationCard from "../components/TransformationCard.astro";
 import { siteData } from "../data/site";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { sortedPosts } from "../utils/blog";
 import { withBase } from "../utils/url";
 
+const { career, engagements, hero } = siteData;
+const contactHref = withBase("/contact");
 const resumeHref = withBase(siteData.socials.resumePath);
-const heroBackgroundHref = withBase("/hero-background.webp");
-const credibilityBackgroundHref = withBase("/proven-enterprise-background.webp");
-const contactEndpoint = import.meta.env.PUBLIC_CONTACT_FORM_ENDPOINT?.trim() ?? "";
 
-const allPosts = await getCollection("blog", ({ data }) => !data.draft);
-const recentPosts = sortedPosts(allPosts).slice(0, 3);
+const featuredSlugs = ["you-might-not-need-ai", "five-dimensions-of-data-readiness"];
+const allPosts = sortedPosts(await getCollection("blog", ({ data }) => !data.draft));
+const featured = featuredSlugs.flatMap((slug) => allPosts.filter((post) => post.slug === slug));
+const articles = featured.length === featuredSlugs.length ? featured : allPosts.slice(0, 2);
 
-const testimonials = [
+const formatDate = (date: Date) =>
+  date.toLocaleDateString("en-GB", { day: "2-digit", month: "long", year: "numeric" });
+
+const [featuredQuote, ...otherQuotes] = [
   {
     quote: "Pierre shows a remarkable combination of deep technical skill and pragmatic business and product acumen.",
     name: "Peter Milne",
@@ -39,341 +36,194 @@ const testimonials = [
   },
 ];
 
-const groupTints: Record<string, string> = {
-  "Strategy": "rgba(234, 219, 207, 0.5)",
-  "Execution": "rgba(188, 209, 202, 0.5)",
-  "AI": "rgba(203, 202, 219, 0.5)",
-};
+const tools = [
+  { href: "/tools/ai-readiness-checklist", label: "AI readiness" },
+  { href: "/tools/data-readiness", label: "Data readiness" },
+  { href: "/tools/ai-approach-finder", label: "AI approach" },
+  { href: "/tools/ai-business-case-scorecard", label: "Business case" },
+  { href: "/tools/ai-project-scoper", label: "Project scope" },
+];
 
-const diagnostics = [
-  {
-    href: withBase("/tools/ai-project-scoper"),
-    eyebrow: "Scoping Tool",
-    title: "AI Project Scoper",
-    description: "Scope your AI initiative across six dimensions and generate a phased roadmap, task list, and Excel workbook.",
-    date: "Apr 2026",
-  },
-  {
-    href: withBase("/tools/ai-business-case-scorecard"),
-    eyebrow: "Scorecard",
-    title: "AI Business Case Scorecard",
-    description: "Nine questions across five dimensions to score your AI business case before it reaches leadership.",
-    date: "Apr 2026",
-  },
-  {
-    href: withBase("/tools/ai-approach-finder"),
-    eyebrow: "Decision Tool",
-    title: "AI Approach Finder",
-    description: "Eight questions to find the right AI approach for your use case — rules, ML, GenAI, RAG, or Agents.",
-    date: "Mar 2025",
-  },
-  {
-    href: withBase("/tools/ai-readiness-checklist"),
-    eyebrow: "Assessment",
-    title: "AI Readiness Checklist",
-    description: "28 questions across five dimensions to assess whether your team and organisation are ready to ship AI.",
-    date: "Feb 2025",
-  },
-  {
-    href: withBase("/tools/data-readiness"),
-    eyebrow: "Assessment",
-    title: "Data Readiness Checklist",
-    description: "27 questions across five dimensions to evaluate data quality, governance, and accessibility before any AI project.",
-    date: "Jan 2025",
-  },
+const careerMarks = [
+  { name: "Adform", src: "/logos/adform.svg" },
+  { name: "Sitecore", src: "/logos/sitecore.svg" },
+  { name: "Amilia", src: "/logos/amilia.svg" },
 ];
 ---
 
 <BaseLayout>
-  <HeaderNav
-    ctaHref={withBase("/contact")}
-    ctaLabel={siteData.hero.primaryCtaLabel}
-    githubUrl={siteData.socials.githubUrl}
-    linkedinUrl={siteData.socials.linkedinUrl}
-    name={siteData.hero.name}
-    sections={siteData.navigation}
-  />
+  <HeaderNav ctaHref={contactHref} ctaLabel={hero.headerCtaLabel} sections={siteData.navigation} />
 
   <main id="main-content">
-    <section class="section section--hero">
-      <div aria-hidden="true" class="hero__backdrop">
-        <img
-          alt=""
-          class="hero__background-image"
-          decoding="async"
-          loading="eager"
-          src={heroBackgroundHref}
-        />
-      </div>
-
-      <div class="shell">
-        <div class="hero hero__layout">
-          <div class="hero__content">
-            <p class="hero__name">{siteData.hero.name}</p>
-            <h1 class="hero__headline reveal" style="--delay: 0ms">{siteData.hero.headline}</h1>
-
-            <div class="hero__copy reveal" style="--delay: 150ms">
-              {siteData.hero.supportingText.map((paragraph) => <p>{paragraph}</p>)}
-            </div>
-
-            <ul class="hero__focus-list reveal" style="--delay: 280ms" aria-label="Areas of focus">
-              {siteData.hero.focusAreas.map((focusArea) => <li>{focusArea}</li>)}
-            </ul>
-          </div>
-
-          <aside class="hero__actions-panel reveal" style="--delay: 400ms" aria-label="Primary actions">
-            <IconLink
-              external={true}
-              href={siteData.socials.linkedinUrl}
-              icon="linkedin"
-              kind="button-secondary"
-              label={siteData.hero.secondaryCtaLabel}
-            />
-            <IconLink
-              external={true}
-              href={siteData.socials.githubUrl}
-              icon="github"
-              kind="button-secondary"
-              label={siteData.hero.quaternaryCtaLabel}
-            />
-            <IconLink href={resumeHref} icon="download" kind="button-secondary" label={siteData.hero.tertiaryCtaLabel} />
-          </aside>
-        </div>
-      </div>
-    </section>
-
-    <section class="shell section section-band section-band--muted" data-section id="diagnostics">
-      <div class="reveal">
-        <p class="eyebrow">Diagnostics</p>
-        <h2 class="section-title mt-5">Practical tools for AI decisions</h2>
-      </div>
-      <div class="diagnostics-grid" role="list">
-        {diagnostics.map((d, i) => (
-          <div class="diagnostic-card reveal" style={`--delay: ${i * 80}ms`} role="listitem">
-            <div class="diagnostic-card__body">
-              <p class="diagnostic-card__eyebrow eyebrow">{d.eyebrow}</p>
-              <h3 class="diagnostic-card__title">{d.title}</h3>
-              <p class="diagnostic-card__desc">{d.description}</p>
-            </div>
-            <div class="diagnostic-card__footer">
-              <div class="diagnostic-card__meta">
-                <span class="diagnostic-card__date-label">Date</span>
-                <span class="diagnostic-card__date">{d.date}</span>
-              </div>
-              <hr class="diagnostic-card__rule" />
-              <a href={d.href} class="button-primary diagnostic-card__cta">Start →</a>
-            </div>
-          </div>
-        ))}
-      </div>
-    </section>
-
-    <section class="shell section section-band section-band--muted" data-section id="point-of-view">
-      <div class="point-of-view__layout grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-16">
-        <div class="point-of-view__intro reveal">
-          <p class="eyebrow">Point of view</p>
-          <h2 class="section-title mt-5 max-w-lg">
-            {siteData.pointOfView.titleLines.map((line) => <span class="block">{line}</span>)}
-          </h2>
-
-          <div class="point-of-view__partners point-of-view__partners--headline" aria-label={siteData.pointOfView.workWithLabel}>
-            <p class="eyebrow">{siteData.pointOfView.workWithLabel}</p>
-
-            <ul class="point-of-view__partner-list" aria-label={siteData.pointOfView.workWithLabel}>
-              {
-                siteData.pointOfView.workWith.map((item) => (
-                  <li class={`point-of-view__partner point-of-view__partner--${item.slug}`}>
-                    <img
-                      alt={item.name}
-                      decoding="async"
-                      loading="lazy"
-                      src={withBase(item.logoPath)}
-                    />
-                  </li>
-                ))
-              }
-            </ul>
-          </div>
-        </div>
-
-        <div class="point-of-view__body reveal" style="--delay: 80ms;">
-          <div class="point-of-view__copy text-base leading-8 text-ink-600 sm:text-lg">
-            {siteData.pointOfView.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
-            <p class="point-of-view-note">{siteData.pointOfView.closing}</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section section-band section-band--muted section--credibility-art" data-section id="credibility">
-      <div aria-hidden="true" class="credibility-strip__backdrop">
-        <img
-          alt=""
-          class="credibility-strip__background-image"
-          decoding="async"
-          loading="lazy"
-          src={credibilityBackgroundHref}
-        />
-      </div>
-
-      <div class="shell">
-        <div class="credibility-strip reveal">
-          <div class="max-w-2xl">
-            <p class="eyebrow">Experience / credibility</p>
-            <h2 class="section-title mt-5">{siteData.credibility.title}</h2>
-            {siteData.credibility.description && (
-              <p class="mt-5 text-base leading-8 text-ink-600 sm:text-lg">
-                {siteData.credibility.description}
-              </p>
-            )}
-          </div>
-
-          <div class="credibility-strip__grid">
-            {
-              siteData.credibility.items.map((item) => (
-                <CredibilityItem
-                  company={item.company}
-                  logoAlt={item.logoAlt}
-                  logoPath={item.logoPath}
-                  relevance={item.relevance}
-                  slug={item.slug}
-                />
-              ))
-            }
-          </div>
-
-          {siteData.credibility.note && (
-            <p class="credibility-strip__note">
-              {siteData.credibility.note}
+    <section class="home-hero">
+      <div class="home-wrap">
+        <p class="home-eyebrow home-hero__label"><span class="home-hero__dot" aria-hidden="true"></span>{hero.eyebrow}</p>
+        <div class="home-hero__grid">
+          <div>
+            <h1><span>From AI</span> <span>ambition to</span> <em>shipped</em> <em>products.</em></h1>
+            <p class="home-hero__intro">I’m <strong>{hero.name}</strong>. {hero.supportingText}</p>
+            <p class="home-hero__role">
+              <strong>{career.currentRole} at {career.currentEmployer}.</strong>
+              <span>Creator of Omni-loop.</span>
             </p>
-          )}
+            <div class="home-hero__actions">
+              <a class="home-button" href={contactHref}>{hero.primaryCtaLabel} <span aria-hidden="true">↗</span></a>
+              <a class="home-link" href={resumeHref}>{hero.resumeCtaLabel} <span aria-hidden="true">↓</span></a>
+            </div>
+          </div>
+          <figure class="home-portrait">
+            <div class="home-portrait__frame">
+              <img src={withBase("/pierre-derval-profile.webp")} alt="Portrait of Pierre Derval" width="1024" height="1536" loading="eager" decoding="async" />
+            </div>
+            <figcaption><em>{hero.brandLine}</em><span>20+ years in enterprise software</span></figcaption>
+          </figure>
         </div>
       </div>
     </section>
 
-    <section class="shell section" data-section id="capabilities">
-      <div class="reveal">
-        <SectionHeading
-          description={siteData.capabilities.description}
-          eyebrow="Focus"
-          title={siteData.capabilities.title}
-        />
-      </div>
-
-      <div class="capability-groups">
-        {
-          siteData.capabilities.groups.map((group, groupIndex) => (
-            <section class="capability-group reveal" style={`--delay: ${80 + groupIndex * 70}ms;`}>
-              <p class="eyebrow capability-group__label">{group.label}</p>
-
-              <div class="capability-group__grid">
-                {
-                  group.items.map((item) => (
-                    <div class="h-full" style={`--group-tint: ${groupTints[group.label] || 'transparent'}`}>
-                      <CapabilityCard
-                        description={item.description}
-                        title={item.title}
-                      />
-                    </div>
-                  ))
-                }
-              </div>
-            </section>
-          ))
-        }
+    <section class="home-career" aria-label="Selected career experience">
+      <div class="home-wrap">
+        <p class="home-eyebrow">Built across enterprise software</p>
+        <ul class="home-career__logos">
+          <li><span class="home-career__plaque"><img src={withBase("/logos/vertuoza.svg")} alt="Vertuoza" width="184" height="56" /></span></li>
+          <li class="home-career__name">CluedIn</li>
+          {careerMarks.map((mark) => (
+            <li><img class="home-career__mark" src={withBase(mark.src)} alt={mark.name} /></li>
+          ))}
+        </ul>
       </div>
     </section>
 
-    <section class="shell section section-band section-band--strong" data-section id="transformations">
-      <div class="reveal">
-        <SectionHeading
-          description={siteData.transformations.description}
-          eyebrow="Work"
-          title={siteData.transformations.title}
-        />
-      </div>
-
-      <div class="transformation-grid">
-        {
-          siteData.transformations.items.map((item, index) => (
-            <div class="reveal h-full" style={`--delay: ${90 + index * 60}ms;`}>
-              <TransformationCard description={item.description} eyebrow={item.eyebrow} title={item.title} />
-            </div>
-          ))
-        }
-      </div>
-    </section>
-
-    <section class="shell section section-band section-band--muted" data-section id="testimonials">
-      <div class="reveal">
-        <p class="eyebrow">Trust</p>
-        <h2 class="section-title mt-5">What leaders say</h2>
-      </div>
-
-      <div class="testimonial-grid">
-        {testimonials.map((t, i) => (
-          <blockquote class="testimonial-card reveal" style={`--delay: ${i * 80}ms`}>
-            <p class="testimonial-card__quote">{t.quote}</p>
-            <footer class="testimonial-card__attribution">
-              <span class="testimonial-card__name">{t.name}</span>
-              <span class="testimonial-card__role">{t.role}</span>
-            </footer>
-          </blockquote>
-        ))}
-      </div>
-
-      <div class="testimonial-cta reveal" style="--delay: 300ms">
-        <a
-          href={siteData.socials.linkedinUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="View more recommendations on LinkedIn"
-          class="button-secondary"
-        >View more on LinkedIn</a>
-      </div>
-    </section>
-
-    <section class="shell section" data-section id="latest-thinking">
-      <div class="reveal">
-        <p class="eyebrow">Latest thinking</p>
-        <h2 class="section-title mt-5">Recent writing on AI and strategy</h2>
-      </div>
-
-      <div class="latest-posts-grid">
-        {recentPosts.map((post, i) => (
-          <div class="reveal" style={`--delay: ${i * 80}ms`}>
-            <BlogPostCard post={post} />
+    <section class="home-work home-section" id="work" aria-labelledby="work-title">
+      <div class="home-wrap">
+        <div class="home-head">
+          <div>
+            <p class="home-eyebrow">What I’m building now · 2026</p>
+            <h2 class="home-title" id="work-title">Strategy with working proof.</h2>
           </div>
-        ))}
-      </div>
-
-      <div class="latest-posts-cta reveal" style="--delay: 300ms">
-        <a href={withBase("/blog")} class="button-secondary">View all articles &rarr;</a>
+        </div>
+        <div class="home-work__panels">
+          {career.proofPanels.map((panel) => (
+            <article class="home-panel">
+              <div class="home-panel__meta"><span><b>{panel.number}</b> · {panel.role}</span><span>{panel.context}</span></div>
+              <h3 class:list={["home-panel__logo", `home-panel__logo--${panel.logoStyle}`]}>
+                <img src={withBase(panel.logoPath)} alt={panel.name} width={panel.logoWidth} height={panel.logoHeight} />
+              </h3>
+              <div class="home-panel__figure">
+                <p class="home-panel__big" set:html={panel.headlineHtml} />
+                <p class="home-panel__sub">{panel.subline}</p>
+              </div>
+              <ul class="home-panel__points">
+                {panel.points.map((point) => <li>{point}</li>)}
+              </ul>
+              <a class="home-panel__link" href={panel.url} target="_blank" rel="noopener noreferrer">Explore {panel.name} ↗</a>
+            </article>
+          ))}
+        </div>
       </div>
     </section>
 
-    <section class="shell section section-band section-band--strong" data-section id="contact">
-      <div class="reveal">
-        <ContactPanel
-          description={siteData.contact.description}
-          directDescription={siteData.contact.directDescription}
-          directMessage={siteData.contact.directMessage}
-          directTitle={siteData.contact.directTitle}
-          endpoint={contactEndpoint}
-          errorMessage={siteData.contact.errorMessage}
-          formDescription={siteData.contact.formDescription}
-          formTitle={siteData.contact.formTitle}
-          githubUrl={siteData.socials.githubUrl}
-          linkedinUrl={siteData.socials.linkedinUrl}
-          privacyNote={siteData.contact.privacyNote}
-          resumeHref={resumeHref}
-          submitLabel={siteData.contact.submitLabel}
-          successMessage={siteData.contact.successMessage}
-          title={siteData.contact.title}
-          unavailableMessage={siteData.contact.unavailableMessage}
-        />
+    <section class="home-proof home-section" id="experience" aria-labelledby="experience-title">
+      <div class="home-wrap">
+        <div class="home-head">
+          <div>
+            <p class="home-eyebrow">{career.priorOutcomesLabel}</p>
+            <h2 class="home-title" id="experience-title">A career spent closing the gap.</h2>
+          </div>
+          <p class="home-head__note">From enterprise data platforms to AI delivery. These results come from earlier roles, before Vertuoza.</p>
+        </div>
+        <div class="home-metrics">
+          {career.homeOutcomes.map((outcome) => (
+            <div class="home-metric">
+              <span class="home-metric__value">{outcome.value}</span>
+              <span class="home-metric__label">{outcome.label}</span>
+              <span class="home-metric__source">{outcome.source}</span>
+            </div>
+          ))}
+        </div>
+        <figure class="home-quote">
+          <blockquote>“{featuredQuote.quote}”</blockquote>
+          <figcaption><strong>{featuredQuote.name}</strong>{featuredQuote.role}</figcaption>
+        </figure>
+        <div class="home-quotes">
+          {otherQuotes.map((item) => (
+            <figure>
+              <blockquote>“{item.quote}”</blockquote>
+              <figcaption><strong>{item.name}</strong>{item.role}</figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="home-section" id="advisory" aria-labelledby="advisory-title">
+      <div class="home-wrap">
+        <div class="home-head">
+          <div>
+            <p class="home-eyebrow">For CEOs and CTOs</p>
+            <h2 class="home-title" id="advisory-title">Where I can help.</h2>
+          </div>
+          <p class="home-head__note">When ambition is clear but the path is not, I help connect the business decision to the team and platform that have to deliver it.</p>
+        </div>
+        <div>
+          {engagements.map((engagement, index) => (
+            <a class="exec-engagement" href={withBase("/services") + `#${engagement.id}`}>
+              <span class="exec-engagement__number">{String(index + 1).padStart(2, "0")}</span>
+              <h3>{engagement.title}</h3>
+              <p>{engagement.summary}</p>
+              <span class="exec-engagement__arrow" aria-hidden="true">↗</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="home-section home-writing" id="writing" aria-labelledby="writing-title">
+      <div class="home-wrap">
+        <div class="home-head">
+          <div>
+            <p class="home-eyebrow">Writing &amp; practical tools</p>
+            <h2 class="home-title" id="writing-title">A point of view. Something you can use.</h2>
+          </div>
+          <a class="home-link" href={withBase("/blog")}>All articles <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="home-articles">
+          {articles.map((post) => (
+            <a class="home-article" href={withBase(`/blog/${post.slug}`)}>
+              {post.data.image && (
+                <div class="home-article__image">
+                  <img src={withBase(post.data.image)} alt="" width="900" height="470" loading="lazy" decoding="async" />
+                </div>
+              )}
+              <span class="home-article__meta">{post.data.category} · {formatDate(post.data.publishDate)}</span>
+              <h3>{post.data.title}</h3>
+              <p>{post.data.excerpt}</p>
+            </a>
+          ))}
+        </div>
+        <div class="home-tools">
+          <div>
+            <h3>Five tools for better AI decisions.</h3>
+            <ul>
+              {tools.map((tool) => <li><a href={withBase(tool.href)}>{tool.label}</a></li>)}
+            </ul>
+          </div>
+          <a class="home-link" href={withBase("/tools")}>Explore diagnostics <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="home-closing" id="contact" aria-labelledby="closing-title">
+      <div class="home-wrap">
+        <div>
+          <p class="home-eyebrow">Start a conversation</p>
+          <h2 id="closing-title">What needs to move forward?</h2>
+        </div>
+        <div class="home-closing__side">
+          <p>Tell me what you are trying to change, where things stand and what is getting in the way.</p>
+          <a class="home-button" href={contactHref}>{hero.primaryCtaLabel} <span aria-hidden="true">↗</span></a>
+        </div>
       </div>
     </section>
   </main>
-
 </BaseLayout>

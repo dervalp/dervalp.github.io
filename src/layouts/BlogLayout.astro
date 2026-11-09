@@ -2,7 +2,7 @@
 import { siteData } from "../data/site";
 import BaseLayout from "./BaseLayout.astro";
 import HeaderNav from "../components/HeaderNav.astro";
-import { absoluteUrl, withBase } from "../utils/url";
+import { withBase } from "../utils/url";
 
 interface Props {
   title: string;
@@ -14,6 +14,7 @@ interface Props {
   imageAlt?: string;
   author?: string;
   category?: string;
+  profilePage?: boolean;
 }
 
 const {
@@ -25,16 +26,14 @@ const {
   image,
   author,
   category,
+  profilePage = false,
 } = Astro.props;
-
-const ogImageUrl = image ? absoluteUrl(image, Astro.site) : undefined;
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout {title} {description} ogType={isArticle ? "article" : "website"} image={isArticle ? image : undefined} {profilePage}>
   <Fragment slot="head">
     {isArticle && (
       <>
-        <meta property="og:type" content="article" />
         {author && <meta property="article:author" content={author} />}
         {publishDate && (
           <meta
@@ -51,22 +50,13 @@ const ogImageUrl = image ? absoluteUrl(image, Astro.site) : undefined;
         {category && (
           <meta property="article:section" content={category} />
         )}
-        {ogImageUrl && (
-          <>
-            <meta property="og:image" content={ogImageUrl} />
-            <meta name="twitter:image" content={ogImageUrl} />
-          </>
-        )}
       </>
     )}
   </Fragment>
 
   <HeaderNav
     ctaHref={withBase("/contact")}
-    ctaLabel={siteData.hero.primaryCtaLabel}
-    githubUrl={siteData.socials.githubUrl}
-    linkedinUrl={siteData.socials.linkedinUrl}
-    name={siteData.hero.name}
+    ctaLabel={siteData.hero.headerCtaLabel}
     sections={siteData.navigation}
   />
 
