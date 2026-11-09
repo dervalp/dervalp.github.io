@@ -3,68 +3,27 @@ import BlogLayout from "../layouts/BlogLayout.astro";
 import { withBase } from "../utils/url";
 import { siteData } from "../data/site";
 
+const { career } = siteData;
 const title = `About · ${siteData.hero.name}`;
 const description =
-  "20 years building platforms at enterprise scale. Now helping organisations ship AI that actually works.";
+  "Pierre Derval is Head of AI at Vertuoza and the creator of Omni-loop, with 20+ years building enterprise software platforms across product, engineering and AI.";
 
-const metrics = [
-  { value: "80%", valueSub: null, label: "AI feature adoption within 6 months" },
-  { value: "weeks", valueSub: "→ hours", label: "Time to deploy AI agents" },
-  { value: "3 months", valueSub: "→ days", label: "Enterprise onboarding time" },
-  { value: "4 months", valueSub: null, label: "Full SaaS platform transformation" },
-];
-
-const timeline = [
-  {
-    years: "2020 – 2026",
-    company: "CluedIn",
-    location: "Brussels",
-    role: "Chief Product Technical Officer",
-    detail: "AI and data platform for regulated industries. Built agentic AI workflows, led SaaS transformation, ACV €300k+, team of 40.",
-  },
-  {
-    years: "2016 – 2020",
-    company: "Adform",
-    location: "London",
-    role: "Principal Architect",
-    detail: "Cross-product platform architecture for a major enterprise adtech platform. Red Dot Award for the FLOW initiative.",
-  },
-  {
-    years: "2012 – 2016",
-    company: "Sitecore",
-    location: "Copenhagen",
-    role: "Lead Developer",
-    detail: "Built SPEAK, the internal platform framework used to develop applications across Sitecore's product suite.",
-  },
-  {
-    years: "2010 – 2012",
-    company: "Amilia",
-    location: "Montreal",
-    role: "VP Product Development",
-    detail: "Led product and engineering for a SaaS platform serving community recreation organisations.",
-  },
-  {
-    years: "2005 – 2009",
-    company: "Brussels",
-    location: "",
-    role: "Engineering and leadership roles",
-    detail: "AG Insurance · BNP Paribas Fortis · SME consulting",
-  },
-];
+const metrics = career.priorOutcomes;
+const timeline = career.timeline;
 ---
 
-<BlogLayout {title} {description}>
+<BlogLayout {title} {description} profilePage>
   <div class="about-page shell">
 
     <!-- Hero: photo + intro -->
     <div class="about-hero">
       <div class="about-hero__text reveal" style="--delay: 0ms">
         <p class="eyebrow">About</p>
-        <h1 class="about-page__headline">20 years building platforms.<br />Now helping others ship AI.</h1>
+        <h1 class="about-page__headline">Pierre Derval.<br />Head of AI at Vertuoza.</h1>
         <div class="about-page__bio">
-          <p>I've spent 20 years at the intersection of engineering, product, and platform. Building things that enterprise teams depend on, in environments where complexity is the default.</p>
-          <p>Most of that work was inside real companies with real constraints: platform frameworks at Sitecore, cross-product architecture at Adform (where the FLOW initiative received a Red Dot Award), and six years as Chief Product Technical Officer at CluedIn, an enterprise data and AI platform serving regulated industries at €300k+ ACV.</p>
-          <p>I started consulting because I kept seeing the same pattern: organisations with genuine AI ambition, real capability, and stalled delivery. Not because the technology was wrong. Because the decision-making, architecture, and execution were not aligned. That is the gap I work in.</p>
+          <p>I am an AI and product executive with 20+ years building and evolving enterprise software platforms. I connect product strategy, technical architecture and delivery to turn complex technology into products people use.</p>
+          <p>Today I am Head of AI at Vertuoza, where I created the Omni-loop framework for AI-assisted engineering and, with the Platform team, brought AI Advisor and MCP capabilities into production. Before that I spent six years as Chief Product Technical Officer at CluedIn, an enterprise data management and AI platform serving regulated enterprises, after platform work at Adform and Sitecore.</p>
+          <p>I also help CEOs and CTOs of software companies with the gap I keep meeting: genuine AI ambition, real capability, and stalled delivery. Not because the technology is wrong, but because decisions, architecture and execution are not aligned.</p>
         </div>
       </div>
       <div class="about-hero__photo reveal" style="--delay: 120ms">
@@ -80,9 +39,23 @@ const timeline = [
       </div>
     </div>
 
+    <!-- Current work: Vertuoza and Omni-loop -->
+    {career.currentWork.map((work, i) => (
+      <section class="about-ikary reveal" style={`--delay: ${130 + i * 10}ms`} aria-labelledby={`about-${work.id}`}>
+        <p class="eyebrow">{work.label}{work.years && ` · ${work.years}`}</p>
+        <h2 class="about-ikary__heading" id={`about-${work.id}`}>{work.name}</h2>
+        <div class="about-ikary__body">
+          {work.summary.map((paragraph) => <p>{paragraph}</p>)}
+        </div>
+        <div class="about-ikary__links">
+          <a href={work.url} target="_blank" rel="noopener noreferrer" class="button-secondary">{work.linkLabel} ↗</a>
+        </div>
+      </section>
+    ))}
+
     <!-- Metrics band -->
     <div class="about-metrics-band reveal" style="--delay: 160ms">
-      <p class="eyebrow about-metrics-band__eyebrow">Signature outcomes</p>
+      <p class="eyebrow about-metrics-band__eyebrow">{career.priorOutcomesLabel}</p>
       <div class="about-metrics-grid">
         {metrics.map((m) => (
           <div class="about-metric">
@@ -93,21 +66,6 @@ const timeline = [
             <span class="about-metric__label">{m.label}</span>
           </div>
         ))}
-      </div>
-    </div>
-
-    <!-- Current work: Ikary -->
-    <div class="about-ikary reveal" style="--delay: 180ms">
-      <p class="eyebrow">Current work</p>
-      <h2 class="about-ikary__heading">Ikary</h2>
-      <div class="about-ikary__body">
-        <p>After years of helping enterprise teams ship AI, I kept running into the same structural problem. AI code generation is getting faster. But the maintenance, review, testing, and debugging that follows is not getting any easier. The generation step solves one problem and creates several others.</p>
-        <p>I created Ikary to explore a different approach: instead of generating code, generate a structured YAML manifest that describes what an application should do. A deterministic runtime then compiles that manifest into a working system. The manifest describes what to build. The runtime handles how.</p>
-        <p>Ikary Manifest is an open-source research project. It includes a declarative manifest language for business applications, a compilation engine, contract validation, and a multi-runtime renderer. It is early work, not a product. But the direction is clear: AI should generate declarations, not source code.</p>
-      </div>
-      <div class="about-ikary__links">
-        <a href="https://github.com/ikary-platform/ikary-manifest" target="_blank" rel="noopener noreferrer" class="button-secondary">GitHub repository</a>
-        <a href="https://ikary.co" target="_blank" rel="noopener noreferrer" class="button-secondary">ikary.co</a>
       </div>
     </div>
 
@@ -132,14 +90,33 @@ const timeline = [
       </div>
     </div>
 
+    <!-- Earlier project: Ikary (secondary) -->
+    <section class="about-ikary reveal" style="--delay: 220ms" aria-labelledby="about-ikary">
+      <p class="eyebrow">Open-source research</p>
+      <h2 class="about-ikary__heading" id="about-ikary">Ikary</h2>
+      <div class="about-ikary__body">
+        <p>Ikary Manifest is an open-source research project exploring a different approach to AI-built software: instead of generating code, generate a structured YAML manifest that describes what an application should do, and let a deterministic runtime compile it into a working system.</p>
+        <p>It includes a declarative manifest language for business applications, a compilation engine, contract validation and a multi-runtime renderer. It is early work, not a product.</p>
+      </div>
+      <div class="about-ikary__links">
+        <a href="https://github.com/ikary-platform/ikary-manifest" target="_blank" rel="noopener noreferrer" class="button-secondary">GitHub repository</a>
+        <a href="https://ikary.co" target="_blank" rel="noopener noreferrer" class="button-secondary">ikary.co</a>
+      </div>
+    </section>
+
     <!-- CTA -->
     <div class="about-cta reveal" style="--delay: 240ms">
       <p class="eyebrow">Ready to talk?</p>
-      <h2 class="about-cta__heading">Start with a free diagnostic call.</h2>
-      <p class="about-cta__body">One hour. No commitment.</p>
-      <a href={withBase("/contact") + "?topic=General+inquiry"} class="button-primary">
-        Book a free hour →
-      </a>
+      <h2 class="about-cta__heading">Bring the challenge you are facing.</h2>
+      <p class="about-cta__body">A few lines of context are enough to start.</p>
+      <div class="about-ikary__links">
+        <a href={withBase("/contact") + "?topic=General+inquiry"} class="button-primary">
+          Discuss your challenge →
+        </a>
+        <a href={withBase(siteData.socials.resumePath)} class="button-secondary" download>
+          Download CV
+        </a>
+      </div>
     </div>
 
   </div>

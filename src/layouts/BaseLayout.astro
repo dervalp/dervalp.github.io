@@ -1,16 +1,23 @@
 ---
 import "../styles/global.css";
+import "../styles/executive.css";
 import { siteData } from "../data/site";
 import { absoluteUrl, canonicalHref, withBase } from "../utils/url";
 
 interface Props {
   title?: string;
   description?: string;
+  ogType?: "website" | "article";
+  image?: string;
+  profilePage?: boolean;
 }
 
 const {
   title = siteData.seo.title,
-  description = siteData.seo.description
+  description = siteData.seo.description,
+  ogType = "website",
+  image,
+  profilePage = false
 } = Astro.props;
 
 const canonicalUrl = Astro.site
@@ -19,7 +26,7 @@ const canonicalUrl = Astro.site
 const siteRootUrl = Astro.site
   ? canonicalHref(import.meta.env.BASE_URL || "/", Astro.site)
   : undefined;
-const ogImageUrl = absoluteUrl(siteData.seo.ogImage, Astro.site);
+const ogImageUrl = absoluteUrl(image ?? siteData.seo.ogImage, Astro.site);
 const ogImageType = siteData.seo.ogImage.endsWith(".jpg") || siteData.seo.ogImage.endsWith(".jpeg")
   ? "image/jpeg"
   : "image/png";
@@ -29,6 +36,7 @@ const sameAs = [
   siteData.socials.xUrl
 ];
 const faviconHref = withBase(siteData.seo.favicon);
+const personId = `${siteRootUrl}#person`;
 const structuredData = siteRootUrl
   ? [
       {
@@ -38,26 +46,43 @@ const structuredData = siteRootUrl
         name: siteData.seo.siteName,
         url: siteRootUrl,
         description: siteData.seo.description,
-        inLanguage: "en-BE"
+        inLanguage: "en-BE",
+        publisher: { "@id": personId }
       },
       {
         "@context": "https://schema.org",
         "@type": "Person",
-        "@id": `${siteRootUrl}#person`,
+        "@id": personId,
         name: siteData.hero.name,
         url: siteRootUrl,
         description: siteData.seo.description,
-        jobTitle: "AI product leadership for enterprise software",
+        jobTitle: siteData.career.currentRole,
+        worksFor: {
+          "@type": "Organization",
+          name: siteData.career.currentEmployer,
+          url: "https://www.vertuoza.com/"
+        },
         image: absoluteUrl("/pierre-derval-profile.webp", Astro.site),
         sameAs,
         knowsAbout: [
           "AI product leadership",
           "Platform strategy",
           "Enterprise software",
-          "Product leadership",
-          "AI governance"
+          "AI-assisted engineering"
         ]
-      }
+      },
+      ...(profilePage && canonicalUrl
+        ? [
+            {
+              "@context": "https://schema.org",
+              "@type": "ProfilePage",
+              "@id": `${canonicalUrl}#profile`,
+              url: canonicalUrl,
+              name: title,
+              mainEntity: { "@id": personId }
+            }
+          ]
+        : [])
     ]
   : undefined;
 ---
@@ -71,14 +96,15 @@ const structuredData = siteRootUrl
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
     <meta name="robots" content="index, follow" />
-    <meta name="theme-color" content="#f3efe7" />
+    <meta name="theme-color" content="#f5f1e9" />
     <meta name="color-scheme" content="light dark" />
     <script is:inline>
+      document.documentElement.classList.add("js");
       (() => {
         const storageKey = "pierre-theme";
         const themeColors = {
-          light: "#f3efe7",
-          dark: "#11161a"
+          light: "#f5f1e9",
+          dark: "#17211b"
         };
 
         try {
@@ -104,16 +130,20 @@ const structuredData = siteRootUrl
       gtag("js", new Date());
       gtag("config", "G-41795XWWS0");
     </script>
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content={siteData.seo.siteName} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:locale" content={siteData.seo.locale} />
     <meta property="og:image" content={ogImageUrl} />
     <meta property="og:image:alt" content={siteData.seo.ogImageAlt} />
-    <meta property="og:image:type" content={ogImageType} />
-    <meta property="og:image:width" content={String(siteData.seo.ogImageWidth)} />
-    <meta property="og:image:height" content={String(siteData.seo.ogImageHeight)} />
+    {!image && (
+      <>
+        <meta property="og:image:type" content={ogImageType} />
+        <meta property="og:image:width" content={String(siteData.seo.ogImageWidth)} />
+        <meta property="og:image:height" content={String(siteData.seo.ogImageHeight)} />
+      </>
+    )}
     {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
@@ -122,9 +152,6 @@ const structuredData = siteRootUrl
     <meta name="twitter:image:alt" content={siteData.seo.ogImageAlt} />
     {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
     <link rel="icon" href={faviconHref} type="image/svg+xml" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
     <link rel="me" href={siteData.socials.linkedinUrl} />
     <link rel="me" href={siteData.socials.githubUrl} />
     <link rel="me" href={siteData.socials.xUrl} />
@@ -140,56 +167,36 @@ const structuredData = siteRootUrl
     <a class="skip-link" href="#main-content">Skip to content</a>
     <slot />
 
-    <footer class="site-footer">
+    <footer class="site-footer exec-footer">
       <div class="shell">
-        <div class="site-footer__grid">
-
-          <div class="site-footer__col site-footer__col--brand">
-            <img src={withBase("/pierre-derval-logo-white.svg")} alt="Pierre Derval" height="20" class="site-footer__logo" />
-            <span class="site-footer__tagline">{siteData.hero.brandLine}</span>
-            <span class="site-footer__copy">Based in Belgium, operating in EU.</span>
-            <span class="site-footer__copy">© {new Date().getFullYear()} {siteData.hero.name}</span>
+        <div class="exec-footer__grid">
+          <div class="exec-footer__brand">
+            <a href={withBase("/")} aria-label="Pierre Derval, home">
+              <img class="exec-footer__logo" src={withBase("/pierre-derval-logo-white.svg")} alt="Pierre Derval" width="254" height="44" />
+            </a>
+            <p class="exec-footer__tagline">{siteData.hero.brandLine}</p>
+            <p class="exec-footer__note">Based in Belgium. Working across enterprise software.</p>
           </div>
-
-          <div class="site-footer__col">
-            <p class="site-footer__col-label">Diagnostics</p>
+          <div>
+            <h2>Explore</h2>
             <ul>
-              <li><a href={withBase("/tools/ai-project-scoper")}>AI Project Scoper</a></li>
-              <li><a href={withBase("/tools/ai-approach-finder")}>AI Approach Finder</a></li>
-              <li><a href={withBase("/tools/ai-readiness-checklist")}>AI Readiness Checklist</a></li>
-              <li><a href={withBase("/tools/data-readiness")}>Data Readiness</a></li>
+              {siteData.navigation.map((item) => <li><a href={withBase(item.href)}>{item.label}</a></li>)}
             </ul>
           </div>
-
-          <div class="site-footer__col">
-            <p class="site-footer__col-label">Navigate</p>
+          <div>
+            <h2>Connect</h2>
             <ul>
-              <li><a href={withBase("/how-i-help")}>How I help</a></li>
-              <li><a href={withBase("/services")}>Services</a></li>
-              <li><a href={withBase("/about")}>About</a></li>
-              <li><a href={withBase("/blog")}>Blog</a></li>
-              <li><a href={withBase("/contact")}>Contact</a></li>
+              <li><a href={siteData.socials.linkedinUrl} target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></li>
+              <li><a href={siteData.socials.githubUrl} target="_blank" rel="noopener noreferrer">GitHub ↗</a></li>
+              <li><a href={siteData.socials.xUrl} target="_blank" rel="noopener noreferrer">X ↗</a></li>
+              <li><a href={withBase(siteData.socials.resumePath)}>{siteData.hero.resumeCtaLabel} ↓</a></li>
+              <li><a href={withBase("/contact")}>Contact ↗</a></li>
             </ul>
           </div>
-
-          <div class="site-footer__col">
-            <p class="site-footer__col-label">Connect</p>
-            <div class="site-footer__socials">
-              <a class="site-footer__social-link" href={siteData.socials.linkedinUrl} target="_blank" rel="noreferrer" aria-label="LinkedIn">
-                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.58c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.68H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.32 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.1 20.45H3.54V9H7.1v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0Z"/></svg>
-                <span>LinkedIn</span>
-              </a>
-              <a class="site-footer__social-link" href={siteData.socials.githubUrl} target="_blank" rel="noreferrer" aria-label="GitHub">
-                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.8.5 12.35c0 5.24 3.3 9.68 7.87 11.25.58.1.79-.26.79-.58 0-.28-.02-1.23-.02-2.24-3.2.71-3.88-1.4-3.88-1.4-.53-1.38-1.29-1.75-1.29-1.75-1.05-.74.08-.72.08-.72 1.16.08 1.77 1.22 1.77 1.22 1.03 1.82 2.71 1.29 3.37.98.1-.77.4-1.29.73-1.59-2.56-.3-5.25-1.31-5.25-5.86 0-1.29.45-2.35 1.19-3.18-.12-.3-.52-1.51.11-3.14 0 0 .97-.32 3.19 1.21a10.8 10.8 0 0 1 5.8 0c2.22-1.53 3.19-1.21 3.19-1.21.63 1.63.23 2.84.11 3.14.74.83 1.19 1.89 1.19 3.18 0 4.56-2.69 5.55-5.26 5.85.41.37.78 1.1.78 2.22 0 1.61-.02 2.9-.02 3.29 0 .32.21.69.8.57 4.56-1.58 7.85-6.01 7.85-11.25C23.5 5.8 18.35.5 12 .5Z"/></svg>
-                <span>GitHub</span>
-              </a>
-              <a class="site-footer__social-link" href={siteData.socials.xUrl} target="_blank" rel="noreferrer" aria-label="X">
-                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                <span>X</span>
-              </a>
-            </div>
-          </div>
-
+        </div>
+        <div class="exec-footer__bottom">
+          <span>© {new Date().getFullYear()} {siteData.hero.name}</span>
+          <span>AI &amp; Product Executive · Enterprise SaaS</span>
         </div>
       </div>
     </footer>

@@ -1542,7 +1542,8 @@ html[data-theme="dark"] .theme-toggle__icon--moon {
   display: none;
 }
 
-.reveal {
+/* Only hide when scripts run, so content stays visible without JavaScript. */
+.js .reveal {
   opacity: 0;
   transform: translateY(18px);
 }
@@ -3465,7 +3466,7 @@ html[data-theme="dark"] .testimonial-card {
     transition-duration: 1ms !important;
   }
 
-  .reveal {
+  .js .reveal {
     opacity: 1;
     transform: none;
     animation: none;
