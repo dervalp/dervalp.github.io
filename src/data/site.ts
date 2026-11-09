@@ -126,7 +126,7 @@ export const siteData = {
     ogImageAlt: "Pierre Derval, AI & Product Executive and Head of AI at Vertuoza",
     ogImageWidth: 1200,
     ogImageHeight: 630,
-    favicon: "/favicon.svg"
+    favicon: "/favicon.svg?v=2"
   },
   navigation: [
     { id: "how-i-help", label: "How I help", href: "/how-i-help" },
