@@ -223,7 +223,7 @@ export const siteData = {
       },
       {
         label: "Architecture owned",
-        text: "A multi-tenant SaaS transformation delivered in 4 months at CluedIn. Cross-product architecture and GraphQL federation at Adform. The SPEAK application framework at Sitecore."
+        text: "A multi-tenant SaaS transformation delivered in 4 months at CluedIn. Cross-product architecture and GraphQL federation at Adform, across about 80 engineers. The SPEAK application framework at Sitecore."
       },
       {
         label: "In production",
@@ -269,7 +269,7 @@ export const siteData = {
         location: "London",
         role: "Principal Architect",
         detail:
-          "Cross-product architecture for an enterprise advertising platform: unified UX and front-end architecture, GraphQL federation. The broader FLOW initiative later received a Red Dot award."
+          "Cross-product architecture for an enterprise advertising platform, involving about 80 engineers: unified UX and front-end architecture, GraphQL federation. The broader FLOW initiative later received a Red Dot award."
       },
       {
         years: "2012 – 2016",
