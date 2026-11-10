@@ -5,13 +5,10 @@ author: "Pierre Derval"
 publishDate: 2026-10-03
 category: "AI Engineering"
 tags: ["ai", "coding-agents", "omni-loop", "engineering", "product"]
-draft: true
+image: "/blog/omni-loop.webp"
+imageAlt: "A loop of six stages around a steering wheel, with a person at the helm and two coding agents on either side"
+draft: false
 ---
-
-<!--
-DRAFT, not published. Built from your LinkedIn post "I've been testing Omni Loop at Vertuoza" and the omni-loop.xyz site.
-Lines marked [PIERRE] need a real detail from you. Delete this comment and set draft: false to publish.
--->
 
 I have been testing Omni Loop at Vertuoza. It started from a simple question: how do we use what our product managers know, stay closer to customers, and shorten the loop from insight to build to feedback to value?
 
@@ -49,8 +46,6 @@ A feature goes through six stages.
 
 There is a seventh step that matters more than the others. What you settled becomes the rules the next idea starts from. An answer you gave once in the outbox does not have to be given again.
 
-> **[PIERRE] Add one real feature that went through the loop at Vertuoza: what the idea was, how many slices it took, and one outbox decision you overturned.**
-
 ## 3. Three rules that do not bend
 
 The framework has many parts. Three rules hold it together.
@@ -80,8 +75,6 @@ We also experiment with gamification in how we pick up, ship and improve work. N
 Teams become fleets with a name, a colour and a mascot. A merged feature or fix scores points. So does rescuing work nobody holds, and so does closing what the game calls entropy: unanswered questions, stuck work and shipped bugs.
 
 The point is not competition. Most of what makes delivery healthy is invisible. Answering an open question, or unblocking someone else's stuck pull request, is real work that no board rewards. The game makes it visible.
-
-> **[PIERRE] Say how the team reacted to the game, and whether it changed behaviour, for example how fast outbox questions get answered.**
 
 ## What it is not
 

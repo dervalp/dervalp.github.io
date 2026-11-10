@@ -5,6 +5,8 @@ author: "Pierre Derval"
 publishDate: 2026-10-16
 category: "AI Engineering"
 tags: ["ai", "coding-agents", "engineering", "production", "enterprise"]
+image: "/blog/small-bugs-pipeline.webp"
+imageAlt: "A pipeline from production logs to a bug, a passing test and a pull request, ending with two people reviewing it"
 draft: false
 ---
 
