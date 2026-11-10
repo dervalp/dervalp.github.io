@@ -722,6 +722,37 @@ summary:focus-visible {
   background: var(--soft);
 }
 
+.home-eng__list {
+  margin: 0;
+}
+
+.home-eng__row {
+  display: grid;
+  grid-template-columns: minmax(9rem, 14rem) minmax(0, 1fr);
+  gap: 0.5rem 2.5rem;
+  border-top: 1px solid var(--line);
+  padding: 1.4rem 0;
+}
+
+.home-eng__row dt {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  letter-spacing: -0.02em;
+}
+
+.home-eng__row dd {
+  margin: 0;
+  max-width: 42rem;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+@media (max-width: 640px) {
+  .home-eng__row {
+    grid-template-columns: 1fr;
+  }
+}
+
 .home-metrics {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

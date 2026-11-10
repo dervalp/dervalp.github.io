@@ -86,6 +86,7 @@ export type SiteData = {
     currentEmployer: string;
     currentWork: CurrentWork[];
     proofPanels: ProofPanel[];
+    engineeringLeadership: { label: string; text: string }[];
     homeOutcomes: HomeOutcome[];
     priorOutcomesLabel: string;
     priorOutcomes: CareerOutcome[];
@@ -117,13 +118,13 @@ export type SiteData = {
 
 export const siteData = {
   seo: {
-    title: "Pierre Derval | AI & Product Executive, Head of AI at Vertuoza",
+    title: "Pierre Derval | Technology & AI Executive, Head of AI at Vertuoza",
     description:
-      "Pierre Derval is an AI & Product Executive and Head of AI at Vertuoza. He helps CEOs and CTOs turn AI ambition into shipped products.",
+      "Pierre Derval is a technology and AI executive and Head of AI at Vertuoza, with 20+ years leading engineering, platform and AI in enterprise software.",
     siteName: "Pierre Derval",
     locale: "en_BE",
     ogImage: "/og-image.png",
-    ogImageAlt: "Pierre Derval, AI & Product Executive and Head of AI at Vertuoza",
+    ogImageAlt: "Pierre Derval, Technology & AI Executive and Head of AI at Vertuoza",
     ogImageWidth: 1200,
     ogImageHeight: 630,
     favicon: "/favicon.svg?v=2"
@@ -138,9 +139,9 @@ export const siteData = {
   hero: {
     name: "Pierre Derval",
     brandLine: "Strategy. Craft. Delivery.",
-    eyebrow: "AI & Product Executive · Belgium",
+    eyebrow: "Technology & AI Executive · Belgium",
     supportingText:
-      "I connect product strategy, engineering and AI to turn complex technology into products people use.",
+      "I lead engineering, platform and AI, with a product eye, to turn complex technology into products people use.",
     primaryCtaLabel: "Discuss your challenge",
     headerCtaLabel: "Let’s talk",
     resumeCtaLabel: "Download CV"
@@ -158,7 +159,7 @@ export const siteData = {
         role: "Head of AI",
         years: "2026 – present",
         summary: [
-          "I am Head of AI at Vertuoza, a B2B construction-management SaaS platform based in Belgium. I lead AI initiatives that span product, engineering and platform architecture.",
+          "I am Head of AI at Vertuoza, a B2B construction-management SaaS platform based in Belgium. I lead AI initiatives that span engineering, platform architecture and product.",
           "Together with the Platform team, I brought AI Advisor and Model Context Protocol (MCP) capabilities into production."
         ],
         url: "https://www.vertuoza.com/",
@@ -182,7 +183,7 @@ export const siteData = {
       {
         number: "01",
         role: "Head of AI",
-        context: "Construction-management SaaS",
+        context: "Engineering delivery · Construction SaaS",
         name: "Vertuoza",
         logoPath: "/logos/vertuoza.svg",
         logoStyle: "plaque",
@@ -199,7 +200,7 @@ export const siteData = {
       {
         number: "02",
         role: "Created by me",
-        context: "Delivery framework for coding agents",
+        context: "Engineering throughput · Coding agents",
         name: "Omni-loop",
         logoPath: "/logos/omni-loop.svg",
         logoStyle: "crest",
@@ -212,6 +213,25 @@ export const siteData = {
           "Product managers and non-technical teammates ship to the product"
         ],
         url: "https://www.omni-loop.xyz/"
+      }
+    ],
+    // Engineering leadership facts. Team size stated by Pierre (2026-11-10); the rest restates the timeline below.
+    engineeringLeadership: [
+      {
+        label: "Teams led",
+        text: "30 engineers at CluedIn, where product and engineering both reported to me. Earlier, the engineering team at Amilia, from hiring to delivery."
+      },
+      {
+        label: "Architecture owned",
+        text: "A multi-tenant SaaS transformation delivered in 4 months at CluedIn. Cross-product architecture and GraphQL federation at Adform. The SPEAK application framework at Sitecore."
+      },
+      {
+        label: "In production",
+        text: "Agentic AI workflows for regulated enterprises at CluedIn. AI Advisor and MCP inside the Vertuoza product, with the Platform team."
+      },
+      {
+        label: "Still building",
+        text: "Omni-loop, a delivery framework for coding agents, and Ikary Manifest, an open-source manifest runtime."
       }
     ],
     homeOutcomes: [
@@ -233,15 +253,15 @@ export const siteData = {
         location: "Belgium",
         role: "Head of AI",
         detail:
-          "B2B construction-management SaaS. Leads AI across product, engineering and platform architecture. Created Omni-loop; brought AI Advisor and MCP capabilities into production with the Platform team."
+          "B2B construction-management SaaS. Leads AI across engineering, platform architecture and product. Created Omni-loop; brought AI Advisor and MCP capabilities into production with the Platform team."
       },
       {
         years: "2020 – 2026",
         company: "CluedIn",
         location: "Brussels",
-        role: "Chief Product Technical Officer",
+        role: "Chief Product & Technology Officer (CPTO)",
         detail:
-          "Enterprise data management and AI platform for regulated enterprises, ACV 300k+, 40-person organisation. Owned product strategy with the CEO, led a multi-tenant SaaS transformation in 4 months and built agentic AI workflows."
+          "Enterprise data management and AI platform for regulated enterprises, ACV 300k+, 40-person organisation. Led product and engineering, with 30 engineers reporting in. Owned product strategy with the CEO, led a multi-tenant SaaS transformation in 4 months and built agentic AI workflows."
       },
       {
         years: "2016 – 2020",
@@ -279,18 +299,18 @@ export const siteData = {
   engagements: [
     {
       id: "ai-product-direction",
-      title: "AI & product direction",
+      title: "Technology & AI direction",
       summary: "Decide where AI belongs, what is worth building and how it supports your business.",
       situation:
         "There is pressure to ship AI, and more ideas than certainty. Shipping the wrong thing, at the wrong time, for the wrong reasons creates more debt than it resolves.",
       workOn: [
         "Which problems are worth solving with AI, and which are better served by automation or simpler tooling",
         "Build-versus-buy framing, and a case that holds up under leadership scrutiny",
-        "A product direction grounded in business priority rather than technology enthusiasm"
+        "A technology and product direction grounded in business priority rather than enthusiasm"
       ],
       approach: [
         "I help leadership teams define what they are actually trying to achieve with AI, then turn that into a small number of decisions the organisation can act on.",
-        "The result is a clear product direction: what to build, what to leave alone, and why."
+        "The result is a clear direction: what to build, what to leave alone, and why."
       ]
     },
     {
@@ -311,11 +331,12 @@ export const siteData = {
     },
     {
       id: "hands-on-executive-advisory",
-      title: "Hands-on executive advisory",
-      summary: "Connect leadership decisions with the teams, systems and working practices that make them real.",
+      title: "Fractional CTO & executive advisory",
+      summary: "Technology leadership on a fractional, interim or advisory basis, close to the teams and systems that deliver.",
       situation:
-        "A programme is already in motion and the decisions are live. You need an experienced outside view that is close enough to the work to be useful.",
+        "A programme is already in motion and the decisions are live. You need experienced technology leadership now, before or instead of a permanent hire.",
       workOn: [
+        "A fractional or interim CTO or Head of AI mandate, embedded with the engineering team",
         "Direct, practical input into architecture, product and delivery decisions already under way",
         "Alignment between founders, executives, product and engineering around priorities and tradeoffs",
         "Working practices that let teams adopt AI-assisted delivery while keeping human review"
@@ -329,7 +350,7 @@ export const siteData = {
   contact: {
     title: "What needs to move forward?",
     description:
-      "If product, platform, and AI need to move together, I can help make that real.",
+      "If engineering, platform and AI need to move together, I can help make that real.",
     directMessage:
       "Tell me what you are trying to change, where things stand and what is getting in the way.",
     formTitle: "Start a conversation",
