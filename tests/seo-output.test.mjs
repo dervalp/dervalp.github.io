@@ -7,7 +7,7 @@ import { join } from "node:path";
 import test from "node:test";
 
 const dist = process.env.SEO_DIST ?? "dist";
-const siteRoot = process.env.SEO_SITE ?? "https://dervalp.github.io/dervalp/";
+const siteRoot = process.env.SEO_SITE ?? "https://dervalp.github.io/";
 const PERSON_ID = `${siteRoot}#person`;
 const WEBSITE_ID = `${siteRoot}#website`;
 

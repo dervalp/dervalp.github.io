@@ -7,7 +7,7 @@
     "dev": "cross-env ASTRO_TELEMETRY_DISABLED=1 astro dev",
     "build": "cross-env ASTRO_TELEMETRY_DISABLED=1 astro build",
     "preview": "cross-env ASTRO_TELEMETRY_DISABLED=1 astro preview",
-    "build:pages": "cross-env ASTRO_TELEMETRY_DISABLED=1 GITHUB_REPOSITORY=dervalp/dervalp GITHUB_REPOSITORY_OWNER=dervalp astro build",
+    "build:pages": "cross-env ASTRO_TELEMETRY_DISABLED=1 GITHUB_REPOSITORY=dervalp/dervalp.github.io GITHUB_REPOSITORY_OWNER=dervalp astro build",
     "test:seo": "node --test tests/seo-output.test.mjs"
   },
   "devDependencies": {

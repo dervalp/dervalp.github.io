@@ -1,6 +1,6 @@
 # Search visibility: checks and follow-up
 
-The site is deployed at `https://dervalp.github.io/dervalp/`. No custom domain is configured.
+The site is deployed at `https://dervalp.github.io/`, the root of the host, from the repository `dervalp/dervalp.github.io`. No custom domain is configured. Until November 2026 it lived at `https://dervalp.github.io/dervalp/`; the repository `dervalp/dervalp` now holds the GitHub profile README and redirect pages for those old URLs.
 
 This file separates what the repository can prove from what can only be checked after deployment. Nothing here promises a ranking. Rankings for "Pierre Derval" are an external outcome and are measured after deployment.
 
@@ -10,7 +10,7 @@ These inspect the generated site. Run them locally, because no pull-request work
 
 ```bash
 npm ci
-npm run build:pages   # builds for the GitHub Pages URL and /dervalp/ base
+npm run build:pages   # builds for the GitHub Pages URL at the host root
 npm run test:seo
 ```
 
@@ -27,7 +27,7 @@ SEO_SITE=https://pierre.example/ npm run test:seo
 
 ## Crawl policy
 
-The project generates `https://dervalp.github.io/dervalp/robots.txt`, which allows all crawlers and names the sitemap. **That file is not authoritative.** Crawlers only read `robots.txt` from the host root, `https://dervalp.github.io/robots.txt`, which this repository does not deploy. Changing this repository cannot change the host-root policy.
+The project generates `https://dervalp.github.io/robots.txt`, which allows all crawlers and names the sitemap. Because the site is served from the host root, this file is the authoritative crawl policy.
 
 Nothing in this repository shows that Google has been blocked.
 
@@ -35,13 +35,13 @@ Nothing in this repository shows that Google has been blocked.
 
 Status of every item below: **not run**. They need the deployed site or a Google Search Console login.
 
-1. Open `https://dervalp.github.io/robots.txt` and record whether it exists and whether it restricts `/dervalp/`.
-2. In Search Console, use the URL-prefix property `https://dervalp.github.io/dervalp/`.
-3. Submit the sitemap `https://dervalp.github.io/dervalp/sitemap.xml`. Note that a sitemap for a URL-prefix property must sit within that prefix, which this one does.
+1. Open `https://dervalp.github.io/robots.txt` and confirm it allows all crawlers and names the sitemap.
+2. In Search Console, add the URL-prefix property `https://dervalp.github.io/`. The verification file in `public/` is served at the root, so it verifies as is.
+3. Submit the sitemap `https://dervalp.github.io/sitemap.xml`.
 4. Use URL Inspection on these pages, and request indexing if they are not indexed:
-   - `https://dervalp.github.io/dervalp/`
-   - `https://dervalp.github.io/dervalp/about/`
-   - `https://dervalp.github.io/dervalp/services/`
+   - `https://dervalp.github.io/`
+   - `https://dervalp.github.io/about/`
+   - `https://dervalp.github.io/services/`
 5. Validate the homepage and About page in Google's Rich Results Test.
 
 ## Branded-search baseline
