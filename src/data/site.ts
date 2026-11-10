@@ -149,17 +149,17 @@ export const siteData = {
   // Career story. Source: Pierre_Derval_CV_AI_Product_Executive_2026_v5.pdf
   // (the public /Pierre_Derval_Resume.pdf). Keep dates and attribution aligned with it.
   career: {
-    currentRole: "Head of AI",
+    currentRole: "Head of AI and Business Transformation",
     currentEmployer: "Vertuoza",
     currentWork: [
       {
         id: "vertuoza",
         label: "Current role",
         name: "Vertuoza",
-        role: "Head of AI",
+        role: "Head of AI and Business Transformation",
         years: "2026 – present",
         summary: [
-          "I am Head of AI at Vertuoza, a B2B construction-management SaaS platform based in Belgium. I lead AI initiatives that span engineering, platform architecture and product.",
+          "I am Head of AI and Business Transformation at Vertuoza, a B2B construction-management SaaS platform based in Belgium, reporting to the CEO. I lead AI initiatives that span engineering, platform architecture and product.",
           "Together with the Platform team, I brought AI Advisor and Model Context Protocol (MCP) capabilities into production."
         ],
         url: "https://www.vertuoza.com/",
@@ -219,7 +219,7 @@ export const siteData = {
     engineeringLeadership: [
       {
         label: "Teams led",
-        text: "30 engineers at Vertuoza today. 30 at CluedIn, where product and engineering both reported to me. Earlier, the engineering team at Amilia, from hiring to delivery."
+        text: "30 engineers at CluedIn, where everyone in product and technology reported to me. Earlier, the engineering team at Amilia, from hiring to delivery."
       },
       {
         label: "Architecture owned",
@@ -251,7 +251,7 @@ export const siteData = {
         years: "2026 – present",
         company: "Vertuoza",
         location: "Belgium",
-        role: "Head of AI",
+        role: "Head of AI and Business Transformation",
         detail:
           "B2B construction-management SaaS. Leads AI across engineering, platform architecture and product. Created Omni-loop; brought AI Advisor and MCP capabilities into production with the Platform team."
       },
@@ -261,7 +261,7 @@ export const siteData = {
         location: "Brussels",
         role: "Chief Product & Technology Officer (CPTO)",
         detail:
-          "Enterprise data management and AI platform for regulated enterprises, ACV 300k+, 40-person organisation. Led product and engineering, with 30 engineers reporting in. Owned product strategy with the CEO, led a multi-tenant SaaS transformation in 4 months and built agentic AI workflows."
+          "Enterprise data management and AI platform for regulated enterprises, ACV 300k+, 40-person organisation. Everyone in product and technology reported to me, including 30 engineers. Owned product strategy with the CEO, led a multi-tenant SaaS transformation in 4 months and built agentic AI workflows."
       },
       {
         years: "2016 – 2020",
