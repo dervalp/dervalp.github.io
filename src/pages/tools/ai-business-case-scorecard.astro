@@ -3,10 +3,12 @@ import BlogLayout from "../../layouts/BlogLayout.astro";
 import AIBusinessCaseScorecard from "../../components/AIBusinessCaseScorecard";
 import { absolutePageUrl, withBase } from "../../utils/url";
 import { siteData } from "../../data/site";
+import ToolGuide from "../../components/ToolGuide.astro";
+import { TOOL_GUIDES } from "../../data/toolGuides";
 
-const title = `AI Business Case Scorecard | ${siteData.hero.name}`;
-const description =
-  "Nine questions across five dimensions to score your AI business case before it reaches leadership.";
+const guide = TOOL_GUIDES["ai-business-case-scorecard"];
+const title = guide.title;
+const description = guide.description;
 
 const toolUrl = absolutePageUrl("/tools/ai-business-case-scorecard", Astro.site);
 
@@ -63,6 +65,9 @@ const twitterShareUrl  = `https://twitter.com/intent/tweet?url=${encodeURICompon
     <div class="tool-page__checklist">
       <AIBusinessCaseScorecard client:only="react" />
     </div>
+
+    <ToolGuide tool="ai-business-case-scorecard" />
+
 
     <!-- Bottom share nudge -->
     <footer class="tool-page__footer">

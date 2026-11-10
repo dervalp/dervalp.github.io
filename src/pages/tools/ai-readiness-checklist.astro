@@ -3,10 +3,12 @@ import BlogLayout from "../../layouts/BlogLayout.astro";
 import AIReadinessChecklist from "../../components/AIReadinessChecklist.astro";
 import { absolutePageUrl, withBase } from "../../utils/url";
 import { siteData } from "../../data/site";
+import ToolGuide from "../../components/ToolGuide.astro";
+import { TOOL_GUIDES } from "../../data/toolGuides";
 
-const title = "AI Readiness Checklist | Pierre Derval";
-const description =
-  "28 questions across five dimensions — business priority, data readiness, architecture maturity, governance, and delivery capability. Know before you build.";
+const guide = TOOL_GUIDES["ai-readiness-checklist"];
+const title = guide.title;
+const description = guide.description;
 
 const toolUrl = absolutePageUrl("/tools/ai-readiness-checklist", Astro.site);
 
@@ -63,6 +65,9 @@ const twitterShareUrl  = `https://twitter.com/intent/tweet?url=${encodeURICompon
     <div class="tool-page__checklist">
       <AIReadinessChecklist />
     </div>
+
+    <ToolGuide tool="ai-readiness-checklist" />
+
 
     <!-- Bottom share nudge -->
     <footer class="tool-page__footer">

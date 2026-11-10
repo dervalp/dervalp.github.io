@@ -1,0 +1,68 @@
+---
+import { TOOL_GUIDES, type ToolGuideKey } from "../data/toolGuides";
+import { absolutePageUrl, canonicalHref } from "../utils/url";
+
+interface Props {
+  tool: ToolGuideKey;
+}
+
+const guide = TOOL_GUIDES[Astro.props.tool];
+const headingId = `${Astro.props.tool}-guide`;
+
+const siteRootUrl = Astro.site
+  ? canonicalHref(import.meta.env.BASE_URL || "/", Astro.site)
+  : undefined;
+const structuredData = siteRootUrl
+  ? {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      name: guide.name,
+      url: absolutePageUrl(guide.path, Astro.site),
+      description: guide.description,
+      applicationCategory: "BusinessApplication",
+      operatingSystem: "Any",
+      inLanguage: "en",
+      isAccessibleForFree: true,
+      offers: { "@type": "Offer", price: "0", priceCurrency: "EUR" },
+      author: { "@id": `${siteRootUrl}#person` }
+    }
+  : undefined;
+---
+
+<section class="tool-guide prose" aria-labelledby={headingId}>
+  <h2 id={headingId}>About the {guide.name}</h2>
+
+  <h3>Who it is for</h3>
+  {guide.whoFor.map((paragraph) => <p>{paragraph}</p>)}
+
+  <h3>What it measures</h3>
+  <p>{guide.measuresIntro}</p>
+  <ul>
+    {guide.measures.map((item) => (
+      <li><strong>{item.term}.</strong> {item.detail}</li>
+    ))}
+  </ul>
+
+  <h3>How to read the result</h3>
+  {guide.howToRead.map((paragraph) => <p>{paragraph}</p>)}
+
+  <h3>Common questions</h3>
+  {guide.faqs.map((faq) => (
+    <>
+      <h4>{faq.question}</h4>
+      <p>{faq.answer}</p>
+    </>
+  ))}
+
+  {structuredData && (
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+  )}
+</section>
+
+<style>
+  .tool-guide {
+    max-width: 46rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--line-subtle);
+  }
+</style>

@@ -3,10 +3,12 @@ import BlogLayout from "../../layouts/BlogLayout.astro";
 import AIApproachFinder from "../../components/AIApproachFinder";
 import { absolutePageUrl, withBase } from "../../utils/url";
 import { siteData } from "../../data/site";
+import ToolGuide from "../../components/ToolGuide.astro";
+import { TOOL_GUIDES } from "../../data/toolGuides";
 
-const title = "AI Approach Finder | Pierre Derval";
-const description =
-  "Answer eight questions to get a scored recommendation across two layers: the right AI brain (rules, ML, deep learning, GenAI) and the right deployment architecture (RAG or Agents).";
+const guide = TOOL_GUIDES["ai-approach-finder"];
+const title = guide.title;
+const description = guide.description;
 
 const toolUrl = absolutePageUrl("/tools/ai-approach-finder", Astro.site);
 
@@ -69,6 +71,9 @@ const twitterShareUrl  = `https://twitter.com/intent/tweet?url=${encodeURICompon
     <div class="tool-page__checklist">
       <AIApproachFinder client:only="react" />
     </div>
+
+    <ToolGuide tool="ai-approach-finder" />
+
 
     <!-- Bottom share nudge -->
     <footer class="tool-page__footer">

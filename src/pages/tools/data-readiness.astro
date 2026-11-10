@@ -3,10 +3,12 @@ import BlogLayout from "../../layouts/BlogLayout.astro";
 import DataReadinessChecklist from "../../components/DataReadinessChecklist.astro";
 import { absolutePageUrl, withBase } from "../../utils/url";
 import { siteData } from "../../data/site";
+import ToolGuide from "../../components/ToolGuide.astro";
+import { TOOL_GUIDES } from "../../data/toolGuides";
 
-const title = "Data Readiness Checklist | Pierre Derval";
-const description =
-  "27 questions across five dimensions — accessibility, quality, ownership, compliance, and freshness. Know the state of your data before any AI project starts.";
+const guide = TOOL_GUIDES["data-readiness"];
+const title = guide.title;
+const description = guide.description;
 
 const toolUrl = absolutePageUrl("/tools/data-readiness", Astro.site);
 
@@ -63,6 +65,9 @@ const twitterShareUrl  = `https://twitter.com/intent/tweet?url=${encodeURICompon
     <div class="tool-page__checklist">
       <DataReadinessChecklist />
     </div>
+
+    <ToolGuide tool="data-readiness" />
+
 
     <!-- Bottom share nudge -->
     <footer class="tool-page__footer">
