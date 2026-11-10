@@ -10,7 +10,7 @@ const { career, engagements, hero } = siteData;
 const contactHref = withBase("/contact");
 const resumeHref = withBase(siteData.socials.resumePath);
 
-const featuredSlugs = ["you-might-not-need-ai", "five-dimensions-of-data-readiness"];
+const featuredSlugs = ["omni-loop-agents-ship-you-steer", "what-makes-a-codebase-agent-ready"];
 const allPosts = sortedPosts(await getCollection("blog", ({ data }) => !data.draft));
 const featured = featuredSlugs.flatMap((slug) => allPosts.filter((post) => post.slug === slug));
 const articles = featured.length === featuredSlugs.length ? featured : allPosts.slice(0, 2);
@@ -20,6 +20,11 @@ const formatDate = (date: Date) =>
 
 const [featuredQuote, ...otherQuotes] = [
   {
+    quote: "Pierre combines a strong helicopter view with the ability to dive deep into product engineering when needed.",
+    name: "Melvin Rook",
+    role: "CTO",
+  },
+  {
     quote: "Pierre shows a remarkable combination of deep technical skill and pragmatic business and product acumen.",
     name: "Peter Milne",
     role: "Trusted advisor",
@@ -28,11 +33,6 @@ const [featuredQuote, ...otherQuotes] = [
     quote: "Pierre consistently brought clarity, strategic insight, and a deep understanding of enterprise data challenges. He combines strong product vision with a pragmatic, execution-focused approach.",
     name: "Finance leader",
     role: "Anonymous enterprise software company",
-  },
-  {
-    quote: "Pierre combines a strong helicopter view with the ability to dive deep into product engineering when needed.",
-    name: "Melvin Rook",
-    role: "CTO",
   },
 ];
 
@@ -99,7 +99,7 @@ const careerMarks = [
         <div class="home-head">
           <div>
             <p class="home-eyebrow">What I’m building now · 2026</p>
-            <h2 class="home-title" id="work-title">Strategy with working proof.</h2>
+            <h2 class="home-title" id="work-title">Engineering with working proof.</h2>
           </div>
         </div>
         <div class="home-work__panels">
@@ -120,6 +120,26 @@ const careerMarks = [
             </article>
           ))}
         </div>
+      </div>
+    </section>
+
+    <section class="home-section home-eng" id="engineering" aria-labelledby="engineering-title">
+      <div class="home-wrap">
+        <div class="home-head">
+          <div>
+            <p class="home-eyebrow">Engineering leadership</p>
+            <h2 class="home-title" id="engineering-title">I run the teams that build it.</h2>
+          </div>
+          <p class="home-head__note">Lead developer, principal architect, then the executive both product and engineering reported to.</p>
+        </div>
+        <dl class="home-eng__list">
+          {career.engineeringLeadership.map((item) => (
+            <div class="home-eng__row">
+              <dt>{item.label}</dt>
+              <dd>{item.text}</dd>
+            </div>
+          ))}
+        </dl>
       </div>
     </section>
 

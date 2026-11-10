@@ -3,7 +3,7 @@ title: "AI Should Generate Manifests, Not Code"
 excerpt: "Generated code is unpredictable, hard to maintain, and expensive to validate. There is a better way: let AI generate structured declarations, and let a deterministic runtime handle the rest."
 author: "Pierre Derval"
 publishDate: 2026-04-08
-category: "AI Strategy"
+category: "AI Engineering"
 tags: ["ai", "code-generation", "architecture", "open-source", "enterprise"]
 image: "/blog/ai-manifests-not-code.webp"
 imageAlt: "A visual progression from infrastructure and data foundations through to AI and predictive systems"
