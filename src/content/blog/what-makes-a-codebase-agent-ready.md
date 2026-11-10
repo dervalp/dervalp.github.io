@@ -2,17 +2,12 @@
 title: "Before Building Another MCP, Make Your Codebase Agent-Ready"
 excerpt: "Eight dimensions that decide whether a coding agent becomes effective in your codebase, and why the limiting factor is almost never the model."
 author: "Pierre Derval"
-publishDate: 2026-11-10
+publishDate: 2026-06-25
 category: "AI Engineering"
 tags: ["ai", "coding-agents", "engineering", "knowledge", "enterprise"]
 cta: "ai-readiness"
-draft: true
+draft: false
 ---
-
-<!--
-DRAFT, not published. Expanded from the LinkedIn post "Before building another MCP, do this first".
-Lines marked [PIERRE] need a real detail from you. Delete this comment and set draft: false to publish.
--->
 
 I have spent several months on one question: what makes a codebase agent-ready?
 
@@ -61,8 +56,6 @@ The weakest areas were consistently the same four:
 
 None of these is an AI problem. They are the problems that made onboarding slow before agents existed. Agents make them visible, because an agent cannot ask a colleague at the coffee machine.
 
-> **[PIERRE] Add one concrete example from a review: a rule everyone on the team knew and no file stated, and what the agent did because of it.**
-
 ## 3. Why the order matters
 
 There is a reason I put this before building more integrations.
@@ -78,8 +71,6 @@ So the order I recommend is:
 3. Make verification automatic, so the agent can check its own work.
 4. Then add tools and integrations.
 
-> **[PIERRE] If you have a before and after from Vertuoza, such as onboarding time or the share of agent pull requests merged without rework, this is the place for it.**
-
 ## 4. How to run the audit
 
 I built a Claude skill that audits these eight dimensions and proposes a remediation plan for the weakest areas.
@@ -91,8 +82,6 @@ You do not need the skill to start. Take one real task from last sprint and ask 
 - Where did the person who did it get the knowledge they needed?
 
 The third answer is usually a name. That name is your documentation backlog.
-
-> **[PIERRE] Link to the skill if you want to share it, or say that it is available on request.**
 
 ## It was the same lesson in data
 

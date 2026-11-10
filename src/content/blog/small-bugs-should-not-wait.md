@@ -2,16 +2,11 @@
 title: "Small Bugs Should Not Wait for a Free Afternoon"
 excerpt: "How we connected production logs to a coding agent that reproduces a bug, fixes it and opens a pull request, while engineers keep the merge."
 author: "Pierre Derval"
-publishDate: 2026-11-10
+publishDate: 2026-10-16
 category: "AI Engineering"
 tags: ["ai", "coding-agents", "engineering", "production", "enterprise"]
-draft: true
+draft: false
 ---
-
-<!--
-DRAFT, not published. Expanded from the LinkedIn post that starts "Might not be as impressive as flying cars".
-Lines marked [PIERRE] need a real detail from you. Delete this comment and set draft: false to publish.
--->
 
 It might not be as impressive as flying cars. It is useful every day.
 
@@ -34,8 +29,6 @@ There are five steps, and only one of them is new.
 **An engineer reviews and merges, as with any other pull request.** The same rules, the same checks, the same people.
 
 **After the release, the tool checks that the error is actually gone.** If it still appears in the logs, the fix did not work, and we know.
-
-> **[PIERRE] Add the numbers you are comfortable sharing: how many pull requests the pipeline has opened, what share were merged, and the typical time from first error to merged fix.**
 
 ## 2. The agent never merges
 
@@ -61,8 +54,6 @@ Three things protect against that.
 
 **The scope is small bugs.** The kind with an obvious cause once someone looks: an unhandled case, a missing check. The pipeline is not there to reinterpret business rules.
 
-> **[PIERRE] Say how you handle this in practice: are some error types or parts of the code excluded from the pipeline? Have you rejected a pull request for this reason? One real example would make this section.**
-
 ## 4. What it needs to work
 
 The agent is the visible part. The conditions around it are what make it work, and they are ordinary engineering.
@@ -81,7 +72,3 @@ The step I would keep if I had to drop all the others is the last one: checking 
 Most bug workflows end at "merged". The ticket is closed and nobody looks again. Here the same tool that found the error confirms it is gone, which turns a fix from a belief into a fact.
 
 That is the part worth copying, with or without an agent.
-
----
-
-> **[PIERRE] Closing line. If this pipeline is part of Omni Loop, say so and link to omni-loop.xyz. If it is a separate internal tool, end on an invitation to compare notes instead.**
