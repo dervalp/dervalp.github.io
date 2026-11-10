@@ -182,8 +182,8 @@ export const siteData = {
     proofPanels: [
       {
         number: "01",
-        role: "Head of AI",
-        context: "Engineering delivery · Construction SaaS",
+        role: "Head of AI and Business Transformation",
+        context: "Engineering delivery",
         name: "Vertuoza",
         logoPath: "/logos/vertuoza.svg",
         logoStyle: "plaque",
@@ -235,11 +235,11 @@ export const siteData = {
       }
     ],
     homeOutcomes: [
-      { value: "80%", label: "Customer adoption of new AI features within six months.", source: "Prior-career outcome" },
+      { value: "80%", label: "Customer adoption of new AI features within six months.", source: "CluedIn" },
       { value: "4 months", label: "To deliver a multi-tenant SaaS platform transformation.", source: "CluedIn" },
       { value: "Weeks → hours", label: "Time to launch AI agents with reusable deployment patterns.", source: "CluedIn" }
     ],
-    priorOutcomesLabel: "Selected outcomes, before Vertuoza",
+    priorOutcomesLabel: "Selected outcomes as CPTO of CluedIn",
     priorOutcomes: [
       { value: "80%", label: "Customer adoption of new AI features within 6 months" },
       { value: "weeks", valueSub: "→ hours", label: "Time to launch AI agents" },
