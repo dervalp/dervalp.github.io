@@ -118,13 +118,13 @@ export type SiteData = {
 
 export const siteData = {
   seo: {
-    title: "Pierre Derval | Technology & AI Executive, Head of AI at Vertuoza",
+    title: "Pierre Derval | Technology & Product Executive, Head of AI at Vertuoza",
     description:
-      "Pierre Derval is a technology and AI executive and Head of AI at Vertuoza, with 20+ years leading engineering, platform and AI in enterprise software.",
+      "Pierre Derval is a technology and product executive: six years as CPTO of CluedIn, now Head of AI and Business Transformation at Vertuoza. 20+ years leading engineering, product and AI in enterprise software.",
     siteName: "Pierre Derval",
     locale: "en_BE",
     ogImage: "/og-image.png",
-    ogImageAlt: "Pierre Derval, Technology & AI Executive and Head of AI at Vertuoza",
+    ogImageAlt: "Pierre Derval, Technology & Product Executive and Head of AI at Vertuoza",
     ogImageWidth: 1200,
     ogImageHeight: 630,
     favicon: "/favicon.svg?v=2"
@@ -139,7 +139,7 @@ export const siteData = {
   hero: {
     name: "Pierre Derval",
     brandLine: "Strategy. Craft. Delivery.",
-    eyebrow: "Technology & AI Executive · Belgium",
+    eyebrow: "Technology & Product Executive · Belgium",
     supportingText:
       "I lead engineering, platform and AI, with a product eye, to turn complex technology into products people use.",
     primaryCtaLabel: "Discuss your challenge",
