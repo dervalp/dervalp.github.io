@@ -219,7 +219,7 @@ export const siteData = {
     engineeringLeadership: [
       {
         label: "Teams led",
-        text: "30 engineers at CluedIn, where product and engineering both reported to me. Earlier, the engineering team at Amilia, from hiring to delivery."
+        text: "30 engineers at Vertuoza today. 30 at CluedIn, where product and engineering both reported to me. Earlier, the engineering team at Amilia, from hiring to delivery."
       },
       {
         label: "Architecture owned",
