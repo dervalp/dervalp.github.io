@@ -40,5 +40,6 @@ I help enterprise teams turn AI ambition into shipped, governed products by alig
 
 ## Connect
 
+- [Website](https://dervalp.github.io/): articles and free AI diagnostics
 - [LinkedIn](https://be.linkedin.com/in/pierrederval)
-- [Resume](./public/Pierre_Derval_Resume.pdf)
+- [Resume](https://dervalp.github.io/Pierre_Derval_Resume.pdf)

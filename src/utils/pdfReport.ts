@@ -41,7 +41,7 @@ function addFooter(doc: jsPDF) {
   doc.line(MARGIN, y, PAGE_W - MARGIN, y);
   doc.setFontSize(7);
   doc.setTextColor(...hexToRgb(COLORS.ink400));
-  doc.text("Generated at dervalp.github.io/dervalp", MARGIN, y + 5);
+  doc.text("Generated at dervalp.github.io", MARGIN, y + 5);
   doc.text(new Date().toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" }), PAGE_W - MARGIN, y + 5, { align: "right" });
 }
 

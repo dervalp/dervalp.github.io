@@ -3,7 +3,7 @@ kit: 1
 
 # The repository the loop opens pull requests on.
 repo:
-  slug: dervalp/dervalp
+  slug: dervalp/dervalp.github.io
   defaultBranch: main
 
 # The coding agents the skills are installed for: any of claude, codex, cursor, gemini.
