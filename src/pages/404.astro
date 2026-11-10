@@ -1,0 +1,30 @@
+---
+import BlogLayout from "../layouts/BlogLayout.astro";
+import { withBase } from "../utils/url";
+import { siteData } from "../data/site";
+
+const title = `Page not found | ${siteData.hero.name}`;
+const description = "This page does not exist. Find the diagnostics, the blog and the rest of the site from here.";
+---
+
+<BlogLayout {title} {description} noindex>
+  <div class="exec-page home-wrap">
+    <header class="exec-page__head">
+      <p class="home-eyebrow">Error 404</p>
+      <h1 class="exec-page__title">This page does not exist.</h1>
+      <p class="exec-page__intro">
+        The link may be old, or the address may have a typo. The site moved to a shorter address in November 2026, so a saved link can be out of date.
+      </p>
+    </header>
+
+    <aside class="exec-page__next">
+      <div>
+        <h2 class="exec-page__next-title">Where to go from here</h2>
+        <p>
+          Try the <a href={withBase("/tools")}>free AI diagnostics</a>, read the <a href={withBase("/blog")}>blog</a>, or see <a href={withBase("/how-i-help")}>how I help</a>.
+        </p>
+      </div>
+      <a class="home-button" href={withBase("/")}>Back to the home page <span aria-hidden="true">↗</span></a>
+    </aside>
+  </div>
+</BlogLayout>
