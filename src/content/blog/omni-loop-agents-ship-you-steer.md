@@ -5,6 +5,8 @@ author: "Pierre Derval"
 publishDate: 2026-10-03
 category: "AI Engineering"
 tags: ["ai", "coding-agents", "omni-loop", "engineering", "product"]
+image: "/blog/omni-loop.webp"
+imageAlt: "A loop of six stages around a steering wheel, with a person at the helm and two coding agents on either side"
 draft: false
 ---
 

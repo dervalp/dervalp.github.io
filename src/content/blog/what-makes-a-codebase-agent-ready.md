@@ -6,6 +6,8 @@ publishDate: 2026-06-25
 category: "AI Engineering"
 tags: ["ai", "coding-agents", "engineering", "knowledge", "enterprise"]
 cta: "ai-readiness"
+image: "/blog/agent-ready-codebase.webp"
+imageAlt: "Documents and a database on the left, an eight-point radar chart in the centre, and a coding agent at a laptop on the right"
 draft: false
 ---
 
