@@ -1,0 +1,343 @@
+{
+  "prd": 29,
+  "runs": [
+    {
+      "run": "merge",
+      "rules": {
+        "version": 1,
+        "findingOrder": [
+          [
+            "bug"
+          ],
+          [
+            "override"
+          ],
+          [
+            "drift"
+          ],
+          [
+            "repeated-red",
+            "flaky"
+          ],
+          [
+            "failing-test"
+          ],
+          [
+            "review"
+          ],
+          [
+            "friction"
+          ],
+          [
+            "territory"
+          ],
+          [
+            "churn"
+          ],
+          [
+            "slow-slice"
+          ]
+        ],
+        "issuesPerRun": 5,
+        "thresholds": {
+          "slowSliceFactor": 3,
+          "repeatedRedCommits": 2,
+          "repeatedRedSlices": 2,
+          "failingTestRuns": 2,
+          "churnRangeCommits": 3,
+          "churnFilePercent": 50,
+          "churnFileLines": 40,
+          "afterMergeDays": 14
+        },
+        "limits": {
+          "logTailLines": 200,
+          "modelInputTokens": 40000
+        },
+        "fieldCaps": {
+          "summary": 1200,
+          "title": 90,
+          "whyItMatters": 600,
+          "lesson": 400,
+          "reason": 300,
+          "why": 300
+        }
+      },
+      "prd": {
+        "number": 29,
+        "title": "Executive-builder website refresh and name-search discoverability",
+        "topic": "executive-website-refresh",
+        "state": "inbox",
+        "folder": ".omni-loop/delivery/shipped/0029-executive-website-refresh"
+      },
+      "featurePr": {
+        "number": 30,
+        "title": "feat(site): executive-builder website and search discoverability",
+        "url": "https://github.com/dervalp/dervalp.github.io/pull/30",
+        "openedAt": "2026-10-16T07:10:47Z",
+        "mergedAt": "2026-11-09T15:48:59Z",
+        "mergeSha": "d2453b663a3f062152f769334c343a9401e445c0"
+      },
+      "kinds": {
+        "timeline": {
+          "featurePr": {
+            "number": 30,
+            "url": "https://github.com/dervalp/dervalp.github.io/pull/30",
+            "openedAt": "2026-10-16T07:10:47Z",
+            "readyAt": "2026-11-09T15:47:14Z",
+            "mergedAt": "2026-11-09T15:48:59Z",
+            "minutes": 35078
+          },
+          "slices": [
+            {
+              "slice": "s1",
+              "pr": 36,
+              "url": "https://github.com/dervalp/dervalp.github.io/pull/36",
+              "openedAt": "2026-10-28T15:32:57Z",
+              "mergedAt": "2026-11-09T15:42:52Z",
+              "closedAt": "2026-11-09T15:42:52Z",
+              "minutes": 17290,
+              "plannedWave": 1,
+              "mergedWave": 1
+            }
+          ],
+          "sliceCount": 1,
+          "waves": {
+            "planned": 4,
+            "merged": 1
+          },
+          "medianMinutes": 17290,
+          "slowFactor": 3
+        },
+        "delivery": {
+          "decisions": {
+            "file": null,
+            "raised": 0,
+            "adopted": 0,
+            "agreed": 0,
+            "drifted": 0,
+            "reworked": 0,
+            "byRank": {},
+            "drifts": []
+          },
+          "override": {
+            "label": "omni:outbox-go",
+            "mergedUnder": false
+          },
+          "territory": {
+            "reason": null,
+            "sharedGround": [
+              "src/data/site.ts",
+              "src/pages/about.astro",
+              "src/styles/global.css",
+              "src/pages/index.astro",
+              "src/layouts/BaseLayout.astro",
+              "src/layouts/BlogLayout.astro",
+              "src/pages/services.astro",
+              "src/pages/how-i-help.astro",
+              "src/pages/contact.astro"
+            ],
+            "counts": {
+              "graded": 1,
+              "breaches": 16,
+              "shared": 7,
+              "unread": 0,
+              "unplanned": 0
+            },
+            "pulls": [
+              {
+                "slice": "s1",
+                "pr": 36,
+                "url": "https://github.com/dervalp/dervalp.github.io/pull/36",
+                "status": "graded",
+                "files": 28,
+                "breaches": [
+                  "docs/seo.md",
+                  "package.json",
+                  "public/logos/omni-loop.svg",
+                  "public/logos/vertuoza.svg",
+                  "public/og-image.png",
+                  "public/pierre-derval-logo-white.svg",
+                  "public/pierre-derval-logo.svg",
+                  "src/components/CapabilityCard.astro",
+                  "src/components/ContactPanel.astro",
+                  "src/components/CredibilityItem.astro",
+                  "src/components/HeaderNav.astro",
+                  "src/components/SectionHeading.astro",
+                  "src/components/ThemeToggle.astro",
+                  "src/components/TransformationCard.astro",
+                  "src/styles/executive.css",
+                  "tests/seo-output.test.mjs"
+                ],
+                "shared": [
+                  "src/layouts/BaseLayout.astro",
+                  "src/layouts/BlogLayout.astro",
+                  "src/pages/contact.astro",
+                  "src/pages/how-i-help.astro",
+                  "src/pages/index.astro",
+                  "src/pages/services.astro",
+                  "src/styles/global.css"
+                ]
+              }
+            ]
+          },
+          "friction": {
+            "label": "omni:needs-fix",
+            "counts": {
+              "stuck": 0,
+              "needsFix": 0,
+              "reclaimed": 0,
+              "commentsUnread": 0,
+              "eventsUnread": 0
+            },
+            "slices": [
+              {
+                "slice": "s1",
+                "prs": [
+                  36
+                ],
+                "claims": 1,
+                "stuck": [],
+                "needsFix": []
+              }
+            ]
+          },
+          "review": {
+            "counts": {
+              "pulls": 2,
+              "reviews": 0,
+              "reviewsByPeople": 0,
+              "reviewsByBots": 0,
+              "threads": 0,
+              "threadsByPeople": 0,
+              "threadsByBots": 0,
+              "red": 0,
+              "unresolved": 0,
+              "reviewsUnread": 0,
+              "threadsUnread": 0
+            },
+            "pulls": [
+              {
+                "pr": 30,
+                "slice": null,
+                "url": "https://github.com/dervalp/dervalp.github.io/pull/30",
+                "reviews": {
+                  "people": 0,
+                  "bots": 0
+                },
+                "threads": {
+                  "people": 0,
+                  "bots": 0
+                },
+                "red": [],
+                "unresolved": []
+              },
+              {
+                "pr": 36,
+                "slice": "s1",
+                "url": "https://github.com/dervalp/dervalp.github.io/pull/36",
+                "reviews": {
+                  "people": 0,
+                  "bots": 0
+                },
+                "threads": {
+                  "people": 0,
+                  "bots": 0
+                },
+                "red": [],
+                "unresolved": []
+              }
+            ]
+          }
+        },
+        "ci": {
+          "slices": [
+            "s1"
+          ],
+          "unread": [],
+          "totals": {
+            "runs": 0,
+            "red": 0,
+            "checks": 0,
+            "commits": 0,
+            "slices": 0
+          },
+          "checks": [],
+          "redRuns": [],
+          "tests": []
+        },
+        "churn": {
+          "pulls": 1,
+          "commits": 6,
+          "added": 2248,
+          "finalAdded": 2211,
+          "churn": 37,
+          "files": [
+            {
+              "path": "src/data/site.ts",
+              "commits": 2,
+              "added": 262,
+              "finalAdded": 225,
+              "churn": 37,
+              "percent": 16
+            }
+          ],
+          "ranges": [],
+          "leftOut": {
+            "generated": [],
+            "lockfile": [],
+            "delivery": [
+              ".omni-loop/delivery/outbox/0029-executive-website-refresh/s1-01-cv-version-published.md",
+              ".omni-loop/delivery/outbox/0029-executive-website-refresh/s1-02-about-free-hour-offer-dropped.md"
+            ]
+          },
+          "noPatch": [],
+          "unread": {
+            "pulls": [],
+            "commits": []
+          },
+          "notCounted": []
+        }
+      },
+      "findings": [
+        {
+          "id": "territory:s1",
+          "kind": "territory",
+          "title": "Slice s1 changed files outside its territory",
+          "happened": "Slice s1 changed 16 paths outside its territory and off the plan’s shared ground: `docs/seo.md`, `package.json`, `public/logos/omni-loop.svg`, `public/logos/vertuoza.svg`, `public/og-image.png`, `public/pierre-derval-logo-white.svg`, `public/pierre-derval-logo.svg`, `src/components/CapabilityCard.astro`, `src/components/ContactPanel.astro`, `src/components/CredibilityItem.astro`, `src/components/HeaderNav.astro`, `src/components/SectionHeading.astro`, `src/components/ThemeToggle.astro`, `src/components/TransformationCard.astro`, `src/styles/executive.css`, `tests/seo-output.test.mjs`.",
+          "evidence": [
+            {
+              "label": "#36",
+              "url": "https://github.com/dervalp/dervalp.github.io/pull/36/files"
+            }
+          ],
+          "source": "delivery",
+          "ref": "F1"
+        }
+      ],
+      "narration": {
+        "model": "anthropic/claude-opus-5.5",
+        "reason": null,
+        "dropped": []
+      },
+      "verdict": {
+        "worthIt": true,
+        "reason": "The territory drift shows a planning gap for site-wide refreshes that the existing knowledge does not cover, and it yields one new lesson about delivery behaviour."
+      },
+      "lessons": [
+        {
+          "text": "A site-wide refresh needs a foundation slice, or declared shared ground, that owns the new shared components, global styles, assets, manifest and test files before page slices begin.",
+          "findings": [
+            "territory:s1"
+          ]
+        }
+      ],
+      "issues": {
+        "territory:s1": {
+          "number": 48,
+          "url": "https://github.com/dervalp/dervalp.github.io/issues/48",
+          "state": "open"
+        }
+      }
+    }
+  ]
+}
